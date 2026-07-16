@@ -15,7 +15,6 @@ import mice2 from "@/assets/mice2.jpg.asset.json";
 import mongolfiere from "@/assets/mongolfiere.jpg.asset.json";
 import exp1 from "@/assets/exp1.jpeg.asset.json";
 import exp2 from "@/assets/exp2.jpeg.asset.json";
-import evenement from "@/assets/evenement.jpg.asset.json";
 
 const pages = [
   { id: "home", label: "Accueil", num: "01" },
@@ -474,13 +473,8 @@ function PageCircuits() {
       <p className="mb-12 max-w-2xl text-base md:text-lg text-foreground/70 leading-relaxed">
         <strong>Chaque Circuit Raconte une Histoire :</strong> Des ruelles envoûtantes de Marrakech aux dunes infinies de Merzouga, des sommets de l'Atlas aux rivages d'Essaouira, nos circuits vous invitent à vivre le Maroc autrement. Chaque étape est une immersion dans un patrimoine unique, entre traditions, gastronomie et paysages d'exception.
       </p>
-      <div className="mb-10 grid grid-cols-2 gap-4 md:max-w-4xl">
-        <div className="aspect-[3/4] overflow-hidden rounded-sm bg-cream/70 shadow-[var(--shadow-elegant)]">
-          <img src={moroccoGrid.url} alt="Paysages du Maroc" className="h-full w-full object-contain object-center" />
-        </div>
-        <div className="aspect-[3/4] overflow-hidden rounded-sm shadow-[var(--shadow-elegant)] mt-8">
-          <img src={evenement.url} alt="Dîner événementiel dans le désert" className="h-full w-full object-cover object-center" />
-        </div>
+      <div className="mb-10 overflow-hidden rounded-sm shadow-[var(--shadow-elegant)] aspect-[16/6] md:aspect-[21/7]">
+        <img src={moroccoGrid.url} alt="Paysages du Maroc" className="w-full h-full object-cover object-center" />
       </div>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
         {items.map((it, i) => (

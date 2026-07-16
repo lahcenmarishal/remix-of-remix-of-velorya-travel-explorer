@@ -475,10 +475,10 @@ function PageCircuits() {
         <strong>Chaque Circuit Raconte une Histoire :</strong> Des ruelles envoûtantes de Marrakech aux dunes infinies de Merzouga, des sommets de l'Atlas aux rivages d'Essaouira, nos circuits vous invitent à vivre le Maroc autrement. Chaque étape est une immersion dans un patrimoine unique, entre traditions, gastronomie et paysages d'exception.
       </p>
       <div className="mb-10 grid grid-cols-2 gap-4 md:max-w-4xl">
-        <div className="aspect-[3/4] overflow-hidden rounded-sm bg-cream/70 shadow-[var(--shadow-elegant)] mt-8">
+        <div className="aspect-[3/4] overflow-hidden rounded-sm bg-cream/70 shadow-[var(--shadow-elegant)]">
           <img src={moroccoGrid.url} alt="Paysages du Maroc" className="h-full w-full object-contain object-center" />
         </div>
-        <div className="aspect-[3/4] overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
+        <div className="aspect-[3/4] overflow-hidden rounded-sm shadow-[var(--shadow-elegant)] mt-8">
           <img src={evenement.url} alt="Dîner événementiel dans le désert" className="h-full w-full object-cover object-center" />
         </div>
       </div>

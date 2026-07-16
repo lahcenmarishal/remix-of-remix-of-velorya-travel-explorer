@@ -525,16 +525,21 @@ function PageExperiences() {
     ["🐪", "Dîner privé au désert", "Une soirée sous les étoiles."],
     ["🏍", "Quad & buggy", "L'adrénaline dans les dunes."],
     ["🐎", "Balade à cheval / chameau", "Explorer au rythme de la nature."],
-    ["⛵", "Croisière & yacht", "Une journée en mer haut de gamme."],
+    ["⛵", "Yacht", "Une journée en mer haut de gamme."],
     ["🍽", "Expériences gastronomiques", "Cours de cuisine et dîners chez l'habitant."],
-    ["💆", "Spa & bien-être", "Hammams et spas d'exception."],
+    ["💆", "Spa & bien-être", "Hammams et spa d'exception."],
     ["📸", "Séance photo pro", "Immortaliser les lieux emblématiques."],
     ["🏍", "Side-car vintage", "Le Maroc autrement, en moto de collection."],
   ];
   return (
-    <PageShell num="10" kicker="Expériences" title="Des expériences qui laissent une trace.">
-      <div className="mb-10 overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
-        <img src={camelSunset.url} alt="Caravane dans le désert" className="w-full h-64 md:h-80 object-cover" />
+    <PageShell num="10" kicker="Expériences" title="L'excellence au cœur de votre voyage.">
+      <div className="mb-10 grid grid-cols-2 gap-4">
+        <div className="overflow-hidden rounded-sm shadow-[var(--shadow-elegant)] aspect-[4/3]">
+          <img src={exp1.url} alt="Quad dans le désert" className="w-full h-full object-cover" />
+        </div>
+        <div className="overflow-hidden rounded-sm shadow-[var(--shadow-elegant)] aspect-[4/3]">
+          <img src={exp2.url} alt="Side-car vintage à Marrakech" className="w-full h-full object-cover" />
+        </div>
       </div>
       <div className="grid gap-x-8 gap-y-5 md:grid-cols-2 max-w-5xl">
         {exps.map(([i, t, d]) => (

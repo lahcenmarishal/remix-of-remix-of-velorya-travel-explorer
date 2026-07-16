@@ -9,6 +9,12 @@ import raid4x4 from "@/assets/raid-4x4.jpg.asset.json";
 import atelier from "@/assets/atelier.jpg.asset.json";
 import theMenthe from "@/assets/the-menthe.jpg.asset.json";
 import camelSunset from "@/assets/camel-sunset.jpg.asset.json";
+import restaurant from "@/assets/restaurant.png.asset.json";
+import mice1 from "@/assets/mice1.jpg.asset.json";
+import mice2 from "@/assets/mice2.jpg.asset.json";
+import mongolfiere from "@/assets/mongolfiere.jpg.asset.json";
+import exp1 from "@/assets/exp1.jpeg.asset.json";
+import exp2 from "@/assets/exp2.jpeg.asset.json";
 
 const pages = [
   { id: "home", label: "Accueil", num: "01" },
@@ -319,19 +325,19 @@ function PageAbout() {
 
 function PageWhy() {
   const items = [
-    { i: "✈", t: "Proximité", d: "À quelques heures de vol de l'Europe, accessible depuis le monde entier." },
-    { i: "☀", t: "Climat", d: "Un ensoleillement généreux toute l'année." },
-    { i: "🤝", t: "Hospitalité", d: "Accueil chaleureux et culture du partage." },
-    { i: "🛡", t: "Sécurité", d: "Destination stable et infrastructures modernes." },
-    { i: "🗣", t: "Multilingue", d: "Français, arabe, amazigh, espagnol et anglais." },
-    { i: "🌍", t: "Diversité", d: "Villes impériales, désert, montagnes, plages." },
-    { i: "🍽", t: "Gastronomie", d: "Une cuisine authentique et réputée mondialement." },
-    { i: "💰", t: "Qualité-prix", d: "Une offre adaptée à tous les budgets." },
+    { i: "✈", t: "Proximité géographique", d: "À seulement quelques heures de vol de l'Europe et facilement accessible depuis de nombreuses destinations internationales." },
+    { i: "☀", t: "Climat agréable", d: "Un ensoleillement généreux et des températures favorables en toute saison." },
+    { i: "🤝", t: "Hospitalité légendaire", d: "Un accueil chaleureux, une culture de partage et un sens reconnu de la convivialité." },
+    { i: "🛡", t: "Sécurité et stabilité", d: "Une destination rassurante avec des infrastructures touristiques modernes." },
+    { i: "🗣", t: "Population multilingue", d: "Le français, l'arabe, l'espagnol et l'anglais sont largement parlés dans les principales destinations touristiques, facilitant les échanges avec les visiteurs." },
+    { i: "🌍", t: "Diversité des expériences", d: "Villes impériales, désert, montagnes, plages et patrimoine culturel exceptionnel." },
+    { i: "🍽", t: "Richesse gastronomique", d: "Une cuisine authentique, réputée pour ses saveurs et sa diversité." },
+    { i: "💰", t: "Excellent rapport qualité-prix", d: "Une offre touristique adaptée à tous les budgets." },
   ];
   return (
     <PageShell tone="sand" num="03" kicker="Destination" title="Pourquoi choisir le Maroc ?">
       <p className="mb-10 max-w-2xl text-base md:text-lg text-foreground/70 leading-relaxed">
-        Le Maroc allie accessibilité, authenticité et qualité d'accueil pour offrir une expérience de voyage unique toute l'année.
+        Le Maroc est une destination privilégiée qui allie accessibilité, authenticité et qualité d'accueil, offrant une expérience de voyage unique tout au long de l'année.
       </p>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {items.map((it) => (
@@ -384,7 +390,13 @@ function PageMice() {
       <div className="grid gap-12 md:grid-cols-5">
         <div className="md:col-span-3 space-y-6 max-w-2xl">
           <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
-            Dans les décors les plus prestigieux du Maroc, nous concevons des programmes incentive qui renforcent les relations, stimulent la motivation et valorisent vos équipes.
+            Parce qu'un voyage peut être bien plus qu'un simple déplacement, nous concevons des <strong>programmes Incentive</strong> qui renforcent les relations, stimulent la motivation et valorisent vos équipes. Dans les décors les plus prestigieux du Maroc, chaque expérience est imaginée pour allier excellence, authenticité et émotion.
+          </p>
+          <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
+            Des événements exclusifs aux activités de team building, en passant par les soirées de gala et les expériences sur mesure, nous transformons vos objectifs en souvenirs inoubliables.
+          </p>
+          <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
+            Faites de chaque instant une source d'inspiration, de chaque destination une réussite, et de chaque événement une expérience d'exception.
           </p>
           <div className="mt-8 grid grid-cols-2 gap-6">
             {["Récompenser", "Inspirer", "Rassembler", "Vivre l'Exception"].map((w) => (
@@ -396,7 +408,7 @@ function PageMice() {
           </div>
         </div>
         <div className="md:col-span-2 aspect-[4/5] overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
-          <img src={desertDinner.url} alt="Dîner dans le désert" className="h-full w-full object-cover" />
+          <img src={restaurant.url} alt="Soirée de gala au Maroc" className="h-full w-full object-cover" />
         </div>
       </div>
     </PageShell>
@@ -405,22 +417,20 @@ function PageMice() {
 
 function PageSeminars() {
   return (
-    <PageShell num="06" kicker="MICE" title="Séminaires & conférences d'exception.">
+    <PageShell num="06" kicker="Meetings" title="Séminaires & conférences d'exception.">
       <div className="grid gap-10 md:grid-cols-5">
         <div className="md:col-span-2 space-y-6 text-base md:text-lg text-foreground/80 leading-relaxed">
           <p>Faites de vos événements professionnels un véritable levier de réussite. Nous concevons séminaires, conférences, conventions et réunions d'entreprise sur mesure, dans les plus belles destinations du Maroc.</p>
           <p className="text-foreground/60 text-base">De la sélection des lieux à la coordination logistique, en passant par les équipements audiovisuels, l'hébergement et les activités complémentaires — chaque détail est orchestré avec rigueur.</p>
           <div className="flex flex-wrap gap-2 pt-2">
-            {["Séminaires", "Conférences", "Conventions", "Congrès", "Lancements", "Réunions exécutives"].map((t) => (
+            {["Séminaires", "Conférences", "Conventions", "Congrès", "Lancements de produits", "Réunions exécutives"].map((t) => (
               <span key={t} className="text-xs uppercase tracking-widest border border-burgundy/30 rounded-full px-3 py-1.5 text-burgundy">{t}</span>
             ))}
           </div>
         </div>
         <div className="md:col-span-3 grid grid-cols-2 gap-4">
-          <img src={desertCamp.url} alt="Camp désert" className="aspect-square object-cover rounded-sm" />
-          <img src={desertDinner.url} alt="Dîner de gala" className="aspect-square object-cover rounded-sm mt-10" />
-          <img src={raid4x4.url} alt="Team building" className="aspect-square object-cover rounded-sm" />
-          <img src={atelier.url} alt="Atelier culturel" className="aspect-square object-cover rounded-sm mt-10" />
+          <img src={mice1.url} alt="Salle de conférence" className="aspect-square object-cover rounded-sm" />
+          <img src={mice2.url} alt="Espace événementiel" className="aspect-square object-cover rounded-sm mt-10" />
         </div>
       </div>
     </PageShell>
@@ -430,15 +440,20 @@ function PageSeminars() {
 function PagePrivate() {
   return (
     <PageShell num="07" kicker="Voyages Privés" title="L'art du voyage privé au Maroc.">
-      <div className="grid gap-12 md:grid-cols-5 items-center">
+      <div className="grid gap-8 md:grid-cols-6 items-center">
         <div className="md:col-span-3 space-y-6 max-w-2xl">
           <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
             Partez à la découverte des plus beaux trésors du Royaume grâce à un service personnalisé alliant luxe, confort et authenticité. Séjournez dans des hôtels prestigieux et des riads d'exception, profitez d'un transport privé avec chauffeur et d'expériences exclusives.
           </p>
           <p className="font-display italic text-2xl text-burgundy">Laissez-nous créer le voyage qui vous ressemble.</p>
         </div>
-        <div className="md:col-span-2 aspect-[4/5] overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
-          <img src={desertCamp.url} alt="Camp de luxe" className="h-full w-full object-cover" />
+        <div className="md:col-span-3 grid grid-cols-2 gap-4">
+          <div className="aspect-[4/5] overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
+            <img src={desertCamp.url} alt="Camp de luxe" className="h-full w-full object-cover" />
+          </div>
+          <div className="aspect-[4/5] overflow-hidden rounded-sm shadow-[var(--shadow-elegant)] mt-8">
+            <img src={mongolfiere.url} alt="Montgolfières au-dessus de Marrakech" className="h-full w-full object-cover" />
+          </div>
         </div>
       </div>
     </PageShell>
@@ -456,10 +471,10 @@ function PageCircuits() {
   return (
     <PageShell tone="sand" num="08" kicker="Circuits" title="Explorez les plus beaux circuits du Maroc.">
       <p className="mb-12 max-w-2xl text-base md:text-lg text-foreground/70 leading-relaxed">
-        Des ruelles envoûtantes de Marrakech aux dunes infinies de Merzouga, chaque circuit est une immersion dans un patrimoine unique — entre traditions, gastronomie et paysages d'exception.
+        <strong>Chaque Circuit Raconte une Histoire :</strong> Des ruelles envoûtantes de Marrakech aux dunes infinies de Merzouga, des sommets de l'Atlas aux rivages d'Essaouira, nos circuits vous invitent à vivre le Maroc autrement. Chaque étape est une immersion dans un patrimoine unique, entre traditions, gastronomie et paysages d'exception.
       </p>
-      <div className="mb-10 overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
-        <img src={moroccoGrid.url} alt="Paysages du Maroc" className="w-full h-64 md:h-80 object-cover" />
+      <div className="mb-10 overflow-hidden rounded-sm shadow-[var(--shadow-elegant)] aspect-[16/6] md:aspect-[21/7]">
+        <img src={moroccoGrid.url} alt="Paysages du Maroc" className="w-full h-full object-cover object-center" />
       </div>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
         {items.map((it, i) => (
@@ -510,16 +525,21 @@ function PageExperiences() {
     ["🐪", "Dîner privé au désert", "Une soirée sous les étoiles."],
     ["🏍", "Quad & buggy", "L'adrénaline dans les dunes."],
     ["🐎", "Balade à cheval / chameau", "Explorer au rythme de la nature."],
-    ["⛵", "Croisière & yacht", "Une journée en mer haut de gamme."],
+    ["⛵", "Yacht", "Une journée en mer haut de gamme."],
     ["🍽", "Expériences gastronomiques", "Cours de cuisine et dîners chez l'habitant."],
-    ["💆", "Spa & bien-être", "Hammams et spas d'exception."],
+    ["💆", "Spa & bien-être", "Hammams et spa d'exception."],
     ["📸", "Séance photo pro", "Immortaliser les lieux emblématiques."],
     ["🏍", "Side-car vintage", "Le Maroc autrement, en moto de collection."],
   ];
   return (
-    <PageShell num="10" kicker="Expériences" title="Des expériences qui laissent une trace.">
-      <div className="mb-10 overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
-        <img src={camelSunset.url} alt="Caravane dans le désert" className="w-full h-64 md:h-80 object-cover" />
+    <PageShell num="10" kicker="Expériences" title="L'excellence au cœur de votre voyage.">
+      <div className="mb-10 grid grid-cols-2 gap-4">
+        <div className="overflow-hidden rounded-sm shadow-[var(--shadow-elegant)] aspect-[4/3]">
+          <img src={exp1.url} alt="Quad dans le désert" className="w-full h-full object-cover" />
+        </div>
+        <div className="overflow-hidden rounded-sm shadow-[var(--shadow-elegant)] aspect-[4/3]">
+          <img src={exp2.url} alt="Side-car vintage à Marrakech" className="w-full h-full object-cover" />
+        </div>
       </div>
       <div className="grid gap-x-8 gap-y-5 md:grid-cols-2 max-w-5xl">
         {exps.map(([i, t, d]) => (

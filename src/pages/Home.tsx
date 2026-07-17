@@ -81,14 +81,10 @@ export default function Home() {
         className={`pointer-events-none fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-5 md:px-10 transition-all duration-300 ${
           !scrolled
             ? "bg-transparent"
-            : pageTones[active] === "sand"
-              ? "backdrop-blur-md border-b border-burgundy/10 shadow-[0_2px_20px_rgba(0,0,0,0.06)]"
-              : pageTones[active] === "dark"
-                ? "bg-burgundy-deep/95 backdrop-blur-md border-b border-gold/20 shadow-[0_2px_20px_rgba(0,0,0,0.25)]"
-                : "bg-background/95 backdrop-blur-md border-b border-burgundy/10 shadow-[0_2px_20px_rgba(0,0,0,0.06)]"
+            : "backdrop-blur-md border-b border-burgundy/10 shadow-[0_2px_20px_rgba(0,0,0,0.06)]"
         }`}
         style={
-          active !== 0 && scrolled && pageTones[active] === "sand"
+          active !== 0 && scrolled
             ? { background: "var(--gradient-sand)" }
             : undefined
         }

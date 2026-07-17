@@ -390,7 +390,7 @@ function PageMice() {
   return (
     <PageShell num="05" kicker="Incentive & Événements" title="L'excellence au service de vos événements d'entreprise.">
       <div className="grid gap-12 md:grid-cols-5">
-        <div className="md:col-span-3 space-y-6 max-w-2xl">
+        <div className="md:col-span-2 space-y-6 max-w-2xl">
           <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
             Parce qu'un voyage peut être bien plus qu'un simple déplacement, nous concevons des <strong>programmes Incentive</strong> qui renforcent les relations, stimulent la motivation et valorisent vos équipes. Dans les décors les plus prestigieux du Maroc, chaque expérience est imaginée pour allier excellence, authenticité et émotion.
           </p>
@@ -409,7 +409,7 @@ function PageMice() {
             ))}
           </div>
         </div>
-        <div className="md:col-span-2 grid grid-cols-2 gap-4">
+        <div className="md:col-span-3 grid grid-cols-2 gap-4">
           <img src={restaurant.url} alt="Soirée de gala au Maroc" className="aspect-[3/4] object-cover rounded-sm shadow-[var(--shadow-soft)] mt-8" />
           <img src={evenement2.url} alt="Dîner événementiel dans le désert" className="aspect-[3/4] object-cover rounded-sm shadow-[var(--shadow-soft)]" />
         </div>
@@ -444,13 +444,13 @@ function PagePrivate() {
   return (
     <PageShell num="07" kicker="Voyages Privés" title="L'art du voyage privé au Maroc.">
       <div className="grid gap-8 md:grid-cols-6 items-center">
-        <div className="md:col-span-3 space-y-6 max-w-2xl">
+        <div className="md:col-span-2 space-y-6 max-w-2xl">
           <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
             Partez à la découverte des plus beaux trésors du Royaume grâce à un service personnalisé alliant luxe, confort et authenticité. Séjournez dans des hôtels prestigieux et des riads d'exception, profitez d'un transport privé avec chauffeur et d'expériences exclusives.
           </p>
           <p className="font-display italic text-2xl text-burgundy">Laissez-nous créer le voyage qui vous ressemble.</p>
         </div>
-        <div className="md:col-span-3 grid grid-cols-2 gap-4">
+        <div className="md:col-span-4 grid grid-cols-2 gap-4">
           <div className="aspect-[4/5] overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
             <img src={desertCamp.url} alt="Camp de luxe" className="h-full w-full object-cover" />
           </div>

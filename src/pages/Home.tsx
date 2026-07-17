@@ -212,9 +212,9 @@ export default function Home() {
   );
 }
 
-function PageShell({ children, tone = "light", num, kicker, title }: { children: React.ReactNode; tone?: "light" | "dark" | "sand"; num?: string; kicker?: string; title?: string }) {
-  const bg = tone === "dark" ? "bg-burgundy-deep text-cream" : tone === "sand" ? "text-foreground" : "bg-background text-foreground";
-  const style = tone === "sand" ? { background: "var(--gradient-sand)" } : undefined;
+function PageShell({ children, tone = "sand", num, kicker, title }: { children: React.ReactNode; tone?: "light" | "dark" | "sand"; num?: string; kicker?: string; title?: string }) {
+  const bg = tone === "dark" ? "bg-burgundy-deep text-cream" : tone === "light" ? "bg-background text-foreground" : "text-foreground";
+  const style = tone === "sand" || tone === undefined ? { background: "var(--gradient-sand)" } : undefined;
   return (
     <section className={`page ${bg}`} style={style}>
       <div className="min-h-screen px-6 pt-28 pb-16 md:px-16 md:pt-32 lg:px-24">

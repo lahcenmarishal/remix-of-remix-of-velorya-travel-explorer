@@ -7,7 +7,7 @@ import desertDinner from "@/assets/desert-dinner.jpg.asset.json";
 import desertCamp from "@/assets/desert-camp.jpg.asset.json";
 import raid4x4 from "@/assets/raid-4x4.jpg.asset.json";
 import atelier from "@/assets/atelier.jpg.asset.json";
-import theMenthe from "@/assets/the-menthe.jpg.asset.json";
+import theMenthe from "@/assets/the-menthe-2.jpg.asset.json";
 import camelSunset from "@/assets/camel-sunset.jpg.asset.json";
 import restaurant from "@/assets/restaurant.png.asset.json";
 import mice1 from "@/assets/mice1.jpg.asset.json";

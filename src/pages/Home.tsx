@@ -247,16 +247,16 @@ function PageHome({ onNext }: { onNext: () => void }) {
           <span className="font-display text-sm md:text-lg lg:text-xl uppercase tracking-[0.32em] text-cream">
             L'Art du Voyage
             <span className="mx-2 md:mx-3 text-gold">—</span>
-            <span className="italic tracking-[0.22em] text-cream/90 normal-case">Signature marocaine depuis 25 ans</span>
+            <span className="italic tracking-[0.22em] text-cream/90 normal-case"></span>
           </span>
         </div>
         <div className="max-w-3xl">
           <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)]">
-            Créateurs de voyages<br />
-            <span className="italic text-gold">d'exception</span> au Maroc.
+            L'excellence du MICE, notre<br />
+            <span className="italic text-gold">signature</span> depuis 25 ans.
           </h1>
           <p className="mt-8 text-base md:text-lg text-cream/90 leading-relaxed max-w-2xl">
-            Depuis plus de 25 ans, nous concevons des expériences uniques — voyages sur-mesure, séminaires, incentives et événements — pensées avec passion, exigence et sens du détail.
+            Depuis plus de 25 ans, Velorya Évent, Speicaliste reconnue du MICE,  accompagne les entreprises dans la conception et la réalisation d'événements professionnels d'envergure, avec une approche personnalisée et un niveau d'exigence élevé.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <button onClick={onNext} className="group flex items-center gap-3 rounded-full bg-cream px-7 py-4 text-sm font-medium text-burgundy hover:bg-gold transition">

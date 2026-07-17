@@ -2,7 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import logo from "@/assets/velorya-logo-transparent.png.asset.json";
 import logoHome from "@/assets/velorya-full-logo.jpg.asset.json";
 import heroRiad from "@/assets/hero-riad.jpg.asset.json";
-import moroccoGrid from "@/assets/morocco-grid.png.asset.json";
+import circuitSouk from "@/assets/circuit-souk.jpeg.asset.json";
+import circuitDesert from "@/assets/circuit-desert.jpeg.asset.json";
+import circuitChefchaouen from "@/assets/circuit-chefchaouen.jpeg.asset.json";
+import circuitKasbah from "@/assets/circuit-kasbah.jpeg.asset.json";
+import circuitTannerie from "@/assets/circuit-tannerie.jpeg.asset.json";
+import circuitEssaouira from "@/assets/circuit-essaouira.jpeg.asset.json";
 import desertDinner from "@/assets/desert-dinner.jpg.asset.json";
 import desertCamp from "@/assets/desert-camp.jpg.asset.json";
 import raid4x4 from "@/assets/raid-4x4.jpg.asset.json";
@@ -472,8 +477,19 @@ function PageCircuits() {
       <p className="mb-12 max-w-2xl text-base md:text-lg text-foreground/70 leading-relaxed">
         <strong>Chaque Circuit Raconte une Histoire :</strong> Des ruelles envoûtantes de Marrakech aux dunes infinies de Merzouga, des sommets de l'Atlas aux rivages d'Essaouira, nos circuits vous invitent à vivre le Maroc autrement. Chaque étape est une immersion dans un patrimoine unique, entre traditions, gastronomie et paysages d'exception.
       </p>
-      <div className="mb-10 overflow-hidden rounded-sm shadow-[var(--shadow-elegant)] bg-cream/40 flex items-center justify-center">
-        <img src={moroccoGrid.url} alt="Paysages du Maroc" className="w-full h-auto object-contain" />
+      <div className="mb-10 grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3">
+        {[
+          { src: circuitKasbah.url, alt: "Kasbah d'Aït-Ben-Haddou" },
+          { src: circuitDesert.url, alt: "Désert du Sahara" },
+          { src: circuitChefchaouen.url, alt: "Chefchaouen, la ville bleue" },
+          { src: circuitEssaouira.url, alt: "Remparts d'Essaouira" },
+          { src: circuitTannerie.url, alt: "Tanneries de Fès" },
+          { src: circuitSouk.url, alt: "Souk marocain" },
+        ].map((img) => (
+          <div key={img.src} className="overflow-hidden rounded-sm shadow-[var(--shadow-elegant)] aspect-[4/3]">
+            <img src={img.src} alt={img.alt} className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" loading="lazy" />
+          </div>
+        ))}
       </div>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((it, i) => (

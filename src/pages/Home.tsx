@@ -477,19 +477,25 @@ function PageCircuits() {
       <p className="mb-12 max-w-2xl text-base md:text-lg text-foreground/70 leading-relaxed">
         <strong>Chaque Circuit Raconte une Histoire :</strong> Des ruelles envoûtantes de Marrakech aux dunes infinies de Merzouga, des sommets de l'Atlas aux rivages d'Essaouira, nos circuits vous invitent à vivre le Maroc autrement. Chaque étape est une immersion dans un patrimoine unique, entre traditions, gastronomie et paysages d'exception.
       </p>
-      <div className="mb-10 grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3">
-        {[
-          { src: circuitKasbah.url, alt: "Kasbah d'Aït-Ben-Haddou" },
-          { src: circuitDesert.url, alt: "Désert du Sahara" },
-          { src: circuitChefchaouen.url, alt: "Chefchaouen, la ville bleue" },
-          { src: circuitEssaouira.url, alt: "Remparts d'Essaouira" },
-          { src: circuitTannerie.url, alt: "Tanneries de Fès" },
-          { src: circuitSouk.url, alt: "Souk marocain" },
-        ].map((img) => (
-          <div key={img.src} className="overflow-hidden rounded-sm shadow-[var(--shadow-elegant)] aspect-[4/3]">
-            <img src={img.src} alt={img.alt} className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" loading="lazy" />
-          </div>
-        ))}
+      <div className="mb-10 grid grid-cols-3 grid-rows-[repeat(4,minmax(0,1fr))] md:grid-rows-[repeat(4,minmax(0,1fr))] gap-2 md:gap-3 aspect-[3/2.2]">
+        <div className="col-span-2 row-span-2 overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
+          <img src={circuitKasbah.url} alt="Kasbah d'Aït-Ben-Haddou" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" loading="lazy" />
+        </div>
+        <div className="col-span-1 row-span-1 overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
+          <img src={circuitChefchaouen.url} alt="Chefchaouen, la ville bleue" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" loading="lazy" />
+        </div>
+        <div className="col-span-1 row-span-1 overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
+          <img src={circuitDesert.url} alt="Désert du Sahara" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" loading="lazy" />
+        </div>
+        <div className="col-span-1 row-span-2 overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
+          <img src={circuitSouk.url} alt="Souk marocain" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" loading="lazy" />
+        </div>
+        <div className="col-span-1 row-span-2 overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
+          <img src={circuitEssaouira.url} alt="Remparts d'Essaouira" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" loading="lazy" />
+        </div>
+        <div className="col-span-1 row-span-2 overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
+          <img src={circuitTannerie.url} alt="Tanneries de Fès" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" loading="lazy" />
+        </div>
       </div>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((it, i) => (

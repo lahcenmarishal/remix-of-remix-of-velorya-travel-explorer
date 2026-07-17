@@ -465,10 +465,11 @@ function PagePrivate() {
 function PageCircuits() {
   const items = [
     { t: "Villes Impériales", d: "Marrakech, Fès, Meknès, Rabat." },
-    { t: "Désert du Sahara", d: "Merzouga, Erg Chebbi, bivouacs." },
+    { t: "Désert du Sahara", d: "Merzouga, Mhamid, bivouacs." },
     { t: "Atlas", d: "Randonnées et villages berbères." },
-    { t: "Côte Atlantique", d: "Essaouira, Taghazout, Dakhla." },
+    { t: "Côte Atlantique", d: "Essaouira, El Jadida, Taghazout, Dakhla." },
     { t: "Kasbahs & Oasis", d: "Aït-Ben-Haddou, Skoura, Draa." },
+    { t: "Gorges", d: "Gorges de Todra, Gorges de Dades." },
   ];
   return (
     <PageShell tone="sand" num="08" kicker="Circuits" title="Explorez les plus beaux circuits du Maroc.">

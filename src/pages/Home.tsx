@@ -479,7 +479,7 @@ function PageCircuits() {
       <div className="mb-10 overflow-hidden rounded-sm shadow-[var(--shadow-elegant)] bg-cream/40 flex items-center justify-center">
         <img src={moroccoGrid.url} alt="Paysages du Maroc" className="w-full h-auto object-contain" />
       </div>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
         {items.map((it, i) => (
           <div key={it.t} className="group">
             <div className="font-display text-4xl text-burgundy/30 mb-2 tabular-nums">0{i + 1}</div>

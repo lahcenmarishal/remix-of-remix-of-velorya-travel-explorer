@@ -99,10 +99,10 @@ export default function Home() {
             <img
               src={logoHome.url}
               alt="Velorya Event"
-              className="h-14 w-14 md:h-16 md:w-16 rounded-full object-cover border-2 border-gold/80 shadow-[0_0_0_2px_rgba(201,168,76,0.35)]"
+              className="h-16 w-16 md:h-20 md:w-20 rounded-full object-cover border-2 border-gold/80 shadow-[0_0_0_2px_rgba(201,168,76,0.35)]"
             />
           ) : (
-            <img src={logo.url} alt="Velorya Event" className="h-12 md:h-14 w-auto object-contain" />
+            <img src={logo.url} alt="Velorya Event" className="h-16 md:h-20 w-auto object-contain" />
           )}
           <span className={`flex flex-col leading-tight text-left ${active === 0 ? "text-cream drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)]" : "text-burgundy"}`}>
             <span className="font-display text-base sm:text-lg md:text-2xl font-medium tracking-[0.14em] uppercase">
@@ -114,23 +114,23 @@ export default function Home() {
           </span>
         </button>
         <div className="pointer-events-auto flex items-center gap-4">
-          <div className="hidden md:flex items-center gap-2 text-xs font-medium text-muted-foreground">
-            <span className="tabular-nums text-burgundy">{pages[active].num}</span>
-            <span className="h-px w-8 bg-burgundy/40" />
-            <span className="tabular-nums">{String(pages.length).padStart(2, "0")}</span>
+          <div className={`hidden md:flex items-center gap-2 text-xs font-semibold ${active === 0 ? "text-cream drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)]" : "text-burgundy"}`}>
+            <span className={`tabular-nums text-base ${active === 0 ? "text-gold" : "text-burgundy"}`}>{pages[active].num}</span>
+            <span className={`h-px w-8 ${active === 0 ? "bg-gold/70" : "bg-burgundy/40"}`} />
+            <span className={`tabular-nums ${active === 0 ? "text-cream/80" : "text-burgundy/70"}`}>{String(pages.length).padStart(2, "0")}</span>
           </div>
           <button
             onClick={toggleLang}
             aria-label="Change language"
-            className={`flex h-11 items-center gap-1 rounded-full border px-4 text-xs font-medium uppercase tracking-widest transition ${
+            className={`flex h-11 items-center gap-1 rounded-full border-2 px-4 text-xs font-semibold uppercase tracking-widest transition shadow-[var(--shadow-soft)] ${
               active === 0
-                ? "border-cream/60 text-cream hover:bg-cream/10"
-                : "border-burgundy/40 text-burgundy hover:bg-burgundy hover:text-cream"
+                ? "border-gold bg-burgundy/40 backdrop-blur-md text-cream hover:bg-burgundy/60"
+                : "border-gold bg-cream/80 backdrop-blur-sm text-burgundy hover:bg-burgundy hover:text-cream"
             }`}
           >
-            <span className={lang === "fr" ? "font-semibold text-gold" : "opacity-70"}>FR</span>
+            <span className={lang === "fr" ? "font-bold text-gold" : "opacity-60"}>FR</span>
             <span className="opacity-50">/</span>
-            <span className={lang === "en" ? "font-semibold text-gold" : "opacity-70"}>EN</span>
+            <span className={lang === "en" ? "font-bold text-gold" : "opacity-60"}>EN</span>
           </button>
           <button
             onClick={() => setMenuOpen((v) => !v)}

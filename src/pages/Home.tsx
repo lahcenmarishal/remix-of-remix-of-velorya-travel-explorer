@@ -478,18 +478,12 @@ function PagePrivate() {
 }
 
 function PageCircuits() {
-  const items = [
-    { t: "Villes Impériales", d: "Marrakech, Fès, Meknès, Rabat." },
-    { t: "Désert du Sahara", d: "Merzouga, Mhamid, bivouacs." },
-    { t: "Atlas", d: "Randonnées et villages berbères." },
-    { t: "Côte Atlantique", d: "Essaouira, El Jadida, Taghazout, Dakhla." },
-    { t: "Kasbahs & Oasis", d: "Aït-Ben-Haddou, Skoura, Draa." },
-    { t: "Gorges", d: "Gorges de Todra, Gorges de Dades." },
-  ];
+  const { t } = useTranslation();
+  const items = t("circuits.items", { returnObjects: true }) as { t: string; d: string }[];
   return (
-    <PageShell tone="sand" num="08" kicker="Circuits" title="Explorez les plus beaux circuits du Maroc.">
+    <PageShell tone="sand" num="08" kicker={t("circuits.kicker")} title={t("circuits.title")}>
       <p className="mb-12 max-w-2xl text-base md:text-lg text-foreground/70 leading-relaxed">
-        <strong>Chaque Circuit Raconte une Histoire :</strong> Des ruelles envoûtantes de Marrakech aux dunes infinies de Merzouga, des sommets de l'Atlas aux rivages d'Essaouira, nos circuits vous invitent à vivre le Maroc autrement. Chaque étape est une immersion dans un patrimoine unique, entre traditions, gastronomie et paysages d'exception.
+        <strong>{t("circuits.intro1")}</strong>{t("circuits.intro2")}
       </p>
       <div className="mb-10 grid grid-cols-3 grid-rows-[repeat(4,minmax(0,1fr))] md:grid-rows-[repeat(4,minmax(0,1fr))] gap-2 md:gap-3 aspect-[3/2.2]">
         <div className="col-span-2 row-span-2 overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
@@ -525,19 +519,10 @@ function PageCircuits() {
 }
 
 function PageDestinations() {
-  const cities = [
-    { t: "Marrakech", d: "La Ville Ocre — palais, jardins et souks effervescents." },
-    { t: "Fès", d: "Un musée à ciel ouvert et la plus ancienne médina." },
-    { t: "Chefchaouen", d: "La ville bleue nichée dans les montagnes du Rif." },
-    { t: "Casablanca", d: "L'énergie de la plus grande métropole du Maroc." },
-    { t: "Rabat", d: "Une capitale raffinée et verdoyante." },
-    { t: "Essaouira", d: "Cité maritime, remparts et couchers de soleil." },
-    { t: "Taghazout", d: "Village de surf, plages dorées, ambiance bohème." },
-    { t: "Ouarzazate", d: "Sur les traces des caravanes et du cinéma." },
-    { t: "Merzouga", d: "Une expérience hors du temps dans le désert." },
-  ];
+  const { t } = useTranslation();
+  const cities = t("destinations.cities", { returnObjects: true }) as { t: string; d: string }[];
   return (
-    <PageShell num="09" kicker="Destinations" title="Des destinations qui font rêver.">
+    <PageShell num="09" kicker={t("destinations.kicker")} title={t("destinations.title")}>
       <div className="grid gap-x-10 gap-y-6 md:grid-cols-3">
         {cities.map((c, i) => (
           <div key={c.t} className="flex gap-5 border-t border-burgundy/15 pt-5">
@@ -554,20 +539,12 @@ function PageDestinations() {
 }
 
 function PageExperiences() {
-  const exps = [
-    ["🎈", "Vol en montgolfière", "Levers de soleil au-dessus de paysages magiques."],
-    ["🚗", "Voiture vintage", "Les plus belles routes en collection."],
-    ["🐪", "Dîner privé au désert", "Une soirée sous les étoiles."],
-    ["🏍", "Quad & buggy", "L'adrénaline dans les dunes."],
-    ["🐎", "Balade à cheval / chameau", "Explorer au rythme de la nature."],
-    ["⛵", "Yacht", "Une journée en mer haut de gamme."],
-    ["🍽", "Expériences gastronomiques", "Cours de cuisine et dîners chez l'habitant."],
-    ["💆", "Spa & bien-être", "Hammams et spa d'exception."],
-    ["📸", "Séance photo pro", "Immortaliser les lieux emblématiques."],
-    ["🏍", "Side-car vintage", "Le Maroc autrement, en moto de collection."],
-  ];
+  const { t } = useTranslation();
+  const icons = ["🎈","🚗","🐪","🏍","🐎","⛵","🍽","💆","📸","🏍"];
+  const rows = t("experiences.items", { returnObjects: true }) as [string, string][];
+  const exps = rows.map((r, i) => [icons[i], r[0], r[1]] as [string, string, string]);
   return (
-    <PageShell num="10" kicker="Expériences" title="L'excellence au cœur de votre voyage.">
+    <PageShell num="10" kicker={t("experiences.kicker")} title={t("experiences.title")}>
       <div className="mb-10 grid grid-cols-2 gap-4">
         <div className="overflow-hidden rounded-sm shadow-[var(--shadow-elegant)] aspect-[4/3]">
           <img src={exp1.url} alt="Quad dans le désert" className="w-full h-full object-cover" />
@@ -592,39 +569,40 @@ function PageExperiences() {
 }
 
 function PageContact() {
+  const { t } = useTranslation();
   return (
-    <PageShell num="11" kicker="Contact" title="Parlons de votre prochain voyage.">
+    <PageShell num="11" kicker={t("contact.kicker")} title={t("contact.title")}>
       <div className="grid gap-16 md:grid-cols-2 items-start">
         <div className="space-y-8">
           <div>
-            <div className="text-xs uppercase tracking-widest text-burgundy mb-2">Bureau</div>
-            <p className="font-display text-2xl text-foreground">Casablanca</p>
-            <p className="text-foreground/70 mt-1">RDC 32, Rue Mohammed El Houdaikie<br />Maârif — Casablanca, Maroc</p>
+            <div className="text-xs uppercase tracking-widest text-burgundy mb-2">{t("contact.office")}</div>
+            <p className="font-display text-2xl text-foreground">{t("contact.city")}</p>
+            <p className="text-foreground/70 mt-1">{t("contact.address")}<br />{t("contact.addressLine2")}</p>
           </div>
           <div>
-            <div className="text-xs uppercase tracking-widest text-burgundy mb-2">Email</div>
+            <div className="text-xs uppercase tracking-widest text-burgundy mb-2">{t("contact.email")}</div>
             <a href="mailto:office@velorya-event.com" className="font-display text-2xl text-foreground hover:text-burgundy transition">office@velorya-event.com</a>
           </div>
           <div>
-            <div className="text-xs uppercase tracking-widest text-burgundy mb-2">Téléphone</div>
+            <div className="text-xs uppercase tracking-widest text-burgundy mb-2">{t("contact.phone")}</div>
             <a href="tel:+212661313485" className="font-display text-2xl text-foreground hover:text-burgundy transition">+212 661 31 34 85</a>
           </div>
           <a href="mailto:office@velorya-event.com" className="inline-flex items-center gap-3 rounded-full bg-burgundy px-7 py-4 text-sm font-medium text-cream hover:bg-burgundy-deep transition">
-            Démarrer un projet <span>→</span>
+            {t("contact.cta")} <span>→</span>
           </a>
         </div>
         <div className="relative">
           <blockquote className="font-display text-3xl md:text-4xl italic leading-tight text-burgundy max-w-md">
-            "Le monde est un livre, ceux qui ne voyagent pas n'en lisent qu'une page."
+            {t("contact.quote")}
           </blockquote>
           <div className="mt-10 flex items-center gap-4">
             <img src={logo.url} alt="Velorya Event" className="h-16 w-16 rounded-full object-cover bg-white ring-1 ring-burgundy/20" />
             <div>
               <div className="font-display text-xl text-burgundy">Velorya Event</div>
-              <div className="text-xs uppercase tracking-widest text-muted-foreground">25 ans d'excellence</div>
+              <div className="text-xs uppercase tracking-widest text-muted-foreground">{t("contact.excellence")}</div>
             </div>
           </div>
-          <p className="mt-14 text-xs text-muted-foreground">© {new Date().getFullYear()} Velorya Event. Tous droits réservés.</p>
+          <p className="mt-14 text-xs text-muted-foreground">{t("contact.rights", { year: new Date().getFullYear() })}</p>
         </div>
       </div>
     </PageShell>

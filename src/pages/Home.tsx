@@ -99,12 +99,12 @@ export default function Home() {
             <img
               src={logoHome.url}
               alt="Velorya Event"
-              className="h-16 w-16 md:h-20 md:w-20 rounded-full object-cover border-2 border-gold/80 shadow-[0_0_0_2px_rgba(201,168,76,0.35)]"
+              className="h-20 w-20 md:h-20 md:w-20 rounded-full object-cover border-2 border-gold/80 shadow-[0_0_0_2px_rgba(201,168,76,0.35)]"
             />
           ) : (
-            <img src={logo.url} alt="Velorya Event" className="h-16 md:h-20 w-auto object-contain" />
+            <img src={logo.url} alt="Velorya Event" className="h-20 md:h-20 w-auto object-contain" />
           )}
-          <span className={`flex flex-col leading-tight text-left ${active === 0 ? "text-cream drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)]" : "text-burgundy"}`}>
+          <span className={`hidden md:flex flex-col leading-tight text-left ${active === 0 ? "text-cream drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)]" : "text-burgundy"}`}>
             <span className="font-display text-base sm:text-lg md:text-2xl font-medium tracking-[0.14em] uppercase">
               Velorya <span className={active === 0 ? "text-gold" : "text-burgundy-deep"}>Event</span>
             </span>

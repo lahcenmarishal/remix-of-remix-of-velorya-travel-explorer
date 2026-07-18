@@ -344,7 +344,6 @@ i18n.use(initReactI18next).init({
   fallbackLng: "fr",
   interpolation: { escapeValue: false },
   returnObjects: true,
-  initImmediate: false,
   react: { useSuspense: false },
 });
 

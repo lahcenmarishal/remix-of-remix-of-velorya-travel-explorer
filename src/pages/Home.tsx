@@ -243,6 +243,7 @@ function PageShell({ children, tone = "sand", num, kicker, title }: { children: 
 }
 
 function PageHome({ onNext }: { onNext: () => void }) {
+  const { t } = useTranslation();
   return (
     <section className="page relative text-cream">
       <div className="sticky top-0 h-screen w-full">
@@ -260,33 +261,33 @@ function PageHome({ onNext }: { onNext: () => void }) {
           <span className="tabular-nums text-xs md:text-sm uppercase tracking-[0.3em] text-cream/80">01</span>
           <span className="h-px w-10 md:w-14 bg-gold/70" />
           <span className="font-display text-sm md:text-lg lg:text-xl uppercase tracking-[0.32em] text-cream">
-            L'Art du Voyage
+            {t("home.kicker")}
             <span className="mx-2 md:mx-3 text-gold">—</span>
             <span className="italic tracking-[0.22em] text-cream/90 normal-case"></span>
           </span>
         </div>
         <div className="max-w-3xl">
           <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)]">
-            L'excellence du MICE, notre<br />
-            <span className="italic text-gold">signature</span> depuis 25 ans.
+            {t("home.title1")}<br />
+            <span className="italic text-gold">{t("home.titleSignature")}</span> {t("home.title2")}
           </h1>
           <p className="mt-8 text-base md:text-lg text-cream/90 leading-relaxed max-w-2xl">
-            Depuis plus de 25 ans, Velorya Évent, Speicaliste reconnue du MICE,  accompagne les entreprises dans la conception et la réalisation d'événements professionnels d'envergure, avec une approche personnalisée et un niveau d'exigence élevé.
+            {t("home.desc")}
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <button onClick={onNext} className="group flex items-center gap-3 rounded-full bg-cream px-7 py-4 text-sm font-medium text-burgundy hover:bg-gold transition">
-              Découvrir l'agence
+              {t("home.cta")}
               <span className="transition-transform group-hover:translate-x-1">→</span>
             </button>
             <a href="#contact" onClick={(e) => { e.preventDefault(); document.querySelectorAll(".page")[10]?.scrollIntoView(); }} className="text-sm underline underline-offset-4 text-cream/80 hover:text-gold">
-              Nous contacter
+              {t("home.contact")}
             </a>
           </div>
           <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-3xl border-t border-cream/30 pt-8">
-            <StatLight n="25+" l="Années d'expertise" />
-            <StatLight n="100%" l="Satisfaction client" />
-            <StatLight n="24/7" l="Assistance" />
-            <StatLight n="Nationale" l="Couverture toutes villes" />
+            <StatLight n="25+" l={t("home.stats.years")} />
+            <StatLight n="100%" l={t("home.stats.satisfaction")} />
+            <StatLight n="24/7" l={t("home.stats.assistance")} />
+            <StatLight n={t("home.stats.coverageValue")} l={t("home.stats.coverage")} />
           </div>
         </div>
       </div>
@@ -313,21 +314,22 @@ function Stat({ n, l }: { n: string; l: string }) {
 }
 
 function PageAbout() {
+  const { t } = useTranslation();
   return (
-    <PageShell num="02" kicker="À Propos" title="Une équipe passionnée au service de vos projets.">
+    <PageShell num="02" kicker={t("nav.pages.about")} title={t("about.title")}>
       <div className="grid gap-12 md:grid-cols-5">
         <div className="md:col-span-3 space-y-6 text-base md:text-lg leading-relaxed text-foreground/80 max-w-2xl">
-          <p>Depuis plus de 25 ans, nous concevons des voyages qui vont bien au-delà d'un simple déplacement : nous créons des expériences uniques, pensées avec passion, exigence et sens du détail.</p>
-          <p>Grâce à des partenariats solides avec des fournisseurs de confiance et un vaste réseau soigneusement développé, nous bénéficions de conditions privilégiées pour offrir des prestations de grande qualité au meilleur rapport qualité-prix.</p>
-          <p>Qu'il s'agisse de loisirs, de voyages d'affaires ou d'expériences exclusives, notre engagement est de transformer chaque séjour en un souvenir inoubliable, sous le signe de l'excellence, du confort et d'un service personnalisé.</p>
+          <p>{t("about.p1")}</p>
+          <p>{t("about.p2")}</p>
+          <p>{t("about.p3")}</p>
         </div>
         <div className="md:col-span-2 relative">
           <div className="aspect-[4/5] overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
-            <img src={theMenthe.url} alt="Thé à la menthe traditionnel" className="h-full w-full object-cover" />
+            <img src={theMenthe.url} alt={t("about.imgAlt")} className="h-full w-full object-cover" />
           </div>
           <div className="absolute -bottom-6 -left-6 hidden md:block bg-burgundy text-cream p-6 rounded-sm max-w-[220px]">
             <div className="font-display text-2xl italic text-gold">"</div>
-            <p className="text-sm leading-snug">L'art du voyage, à la marocaine.</p>
+            <p className="text-sm leading-snug">{t("about.quote")}</p>
           </div>
         </div>
       </div>
@@ -336,20 +338,21 @@ function PageAbout() {
 }
 
 function PageWhy() {
+  const { t } = useTranslation();
   const items = [
-    { i: "✈", t: "Proximité géographique", d: "À seulement quelques heures de vol de l'Europe et facilement accessible depuis de nombreuses destinations internationales." },
-    { i: "☀", t: "Climat agréable", d: "Un ensoleillement généreux et des températures favorables en toute saison." },
-    { i: "🤝", t: "Hospitalité légendaire", d: "Un accueil chaleureux, une culture de partage et un sens reconnu de la convivialité." },
-    { i: "🛡", t: "Sécurité et stabilité", d: "Une destination rassurante avec des infrastructures touristiques modernes." },
-    { i: "🗣", t: "Population multilingue", d: "Le français, l'arabe, l'espagnol et l'anglais sont largement parlés dans les principales destinations touristiques, facilitant les échanges avec les visiteurs." },
-    { i: "🌍", t: "Diversité des expériences", d: "Villes impériales, désert, montagnes, plages et patrimoine culturel exceptionnel." },
-    { i: "🍽", t: "Richesse gastronomique", d: "Une cuisine authentique, réputée pour ses saveurs et sa diversité." },
-    { i: "💰", t: "Excellent rapport qualité-prix", d: "Une offre touristique adaptée à tous les budgets." },
+    { i: "✈", t: t("why.items.proxT"), d: t("why.items.proxD") },
+    { i: "☀", t: t("why.items.climT"), d: t("why.items.climD") },
+    { i: "🤝", t: t("why.items.hospT"), d: t("why.items.hospD") },
+    { i: "🛡", t: t("why.items.secT"), d: t("why.items.secD") },
+    { i: "🗣", t: t("why.items.langT"), d: t("why.items.langD") },
+    { i: "🌍", t: t("why.items.divT"), d: t("why.items.divD") },
+    { i: "🍽", t: t("why.items.gastT"), d: t("why.items.gastD") },
+    { i: "💰", t: t("why.items.valT"), d: t("why.items.valD") },
   ];
   return (
-    <PageShell tone="sand" num="03" kicker="Destination" title="Pourquoi choisir le Maroc ?">
+    <PageShell tone="sand" num="03" kicker={t("why.kicker")} title={t("why.title")}>
       <p className="mb-10 max-w-2xl text-base md:text-lg text-foreground/70 leading-relaxed">
-        Le Maroc est une destination privilégiée qui allie accessibilité, authenticité et qualité d'accueil, offrant une expérience de voyage unique tout au long de l'année.
+        {t("why.intro")}
       </p>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {items.map((it) => (
@@ -365,18 +368,14 @@ function PageWhy() {
 }
 
 function PageMission() {
-  const services = [
-    "Voyages d'affaires & solutions MICE",
-    "Circuits touristiques & programmes de découverte",
-    "Voyages de loisirs sur-mesure",
-    "Programmes incentive & team building",
-  ];
+  const { t } = useTranslation();
+  const services = t("mission.services", { returnObjects: true }) as string[];
   return (
-    <PageShell num="04" kicker="Notre Mission" title="Transformer chaque projet en expérience mémorable.">
+    <PageShell num="04" kicker={t("mission.kicker")} title={t("mission.title")}>
       <div className="grid gap-12 md:grid-cols-2 items-center">
         <div className="space-y-6">
           <p className="text-base md:text-lg text-foreground/80 leading-relaxed max-w-xl">
-            Nous concevons et organisons des expériences adaptées aux besoins spécifiques de chacun de nos clients, avec expertise, créativité et exigence de qualité.
+            {t("mission.intro")}
           </p>
           <ul className="space-y-4">
             {services.map((s, i) => (
@@ -397,21 +396,23 @@ function PageMission() {
 }
 
 function PageMice() {
+  const { t } = useTranslation();
+  const pillars = t("mice.pillars", { returnObjects: true }) as string[];
   return (
-    <PageShell num="05" kicker="Incentive & Événements" title="L'excellence au service de vos événements d'entreprise.">
+    <PageShell num="05" kicker={t("mice.kicker")} title={t("mice.title")}>
       <div className="grid gap-12 md:grid-cols-5">
         <div className="md:col-span-2 space-y-6 max-w-2xl">
           <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
-            Parce qu'un voyage peut être bien plus qu'un simple déplacement, nous concevons des <strong>programmes Incentive</strong> qui renforcent les relations, stimulent la motivation et valorisent vos équipes. Dans les décors les plus prestigieux du Maroc, chaque expérience est imaginée pour allier excellence, authenticité et émotion.
+            {t("mice.p1Prefix")}<strong>{t("mice.p1Bold")}</strong>{t("mice.p1Suffix")}
           </p>
           <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
-            Des événements exclusifs aux activités de team building, en passant par les soirées de gala et les expériences sur mesure, nous transformons vos objectifs en souvenirs inoubliables.
+            {t("mice.p2")}
           </p>
           <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
-            Faites de chaque instant une source d'inspiration, de chaque destination une réussite, et de chaque événement une expérience d'exception.
+            {t("mice.p3")}
           </p>
           <div className="mt-8 grid grid-cols-2 gap-6">
-            {["Récompenser", "Inspirer", "Rassembler", "Vivre l'Exception"].map((w) => (
+            {pillars.map((w) => (
               <div key={w} className="border-t border-burgundy/20 pt-4">
                 <div className="text-burgundy text-xs uppercase tracking-widest">✦</div>
                 <div className="font-display text-2xl mt-2 text-burgundy">{w}</div>
@@ -429,15 +430,17 @@ function PageMice() {
 }
 
 function PageSeminars() {
+  const { t } = useTranslation();
+  const tags = t("seminars.tags", { returnObjects: true }) as string[];
   return (
-    <PageShell num="06" kicker="Meetings" title="Séminaires & conférences d'exception.">
+    <PageShell num="06" kicker={t("seminars.kicker")} title={t("seminars.title")}>
       <div className="grid gap-10 md:grid-cols-5">
         <div className="md:col-span-2 space-y-6 text-base md:text-lg text-foreground/80 leading-relaxed">
-          <p>Faites de vos événements professionnels un véritable levier de réussite. Nous concevons séminaires, conférences, conventions et réunions d'entreprise sur mesure, dans les plus belles destinations du Maroc.</p>
-          <p className="text-foreground/60 text-base">De la sélection des lieux à la coordination logistique, en passant par les équipements audiovisuels, l'hébergement et les activités complémentaires — chaque détail est orchestré avec rigueur.</p>
+          <p>{t("seminars.p1")}</p>
+          <p className="text-foreground/60 text-base">{t("seminars.p2")}</p>
           <div className="flex flex-wrap gap-2 pt-2">
-            {["Séminaires", "Conférences", "Conventions", "Congrès", "Lancements de produits", "Réunions exécutives"].map((t) => (
-              <span key={t} className="text-xs uppercase tracking-widest border border-burgundy/30 rounded-full px-3 py-1.5 text-burgundy">{t}</span>
+            {tags.map((tag) => (
+              <span key={tag} className="text-xs uppercase tracking-widest border border-burgundy/30 rounded-full px-3 py-1.5 text-burgundy">{tag}</span>
             ))}
           </div>
         </div>
@@ -451,14 +454,15 @@ function PageSeminars() {
 }
 
 function PagePrivate() {
+  const { t } = useTranslation();
   return (
-    <PageShell num="07" kicker="Voyages Privés" title="L'art du voyage privé au Maroc.">
+    <PageShell num="07" kicker={t("private.kicker")} title={t("private.title")}>
       <div className="grid gap-8 md:grid-cols-6 items-center">
         <div className="md:col-span-2 space-y-6 max-w-2xl">
           <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
-            Partez à la découverte des plus beaux trésors du Royaume grâce à un service personnalisé alliant luxe, confort et authenticité. Séjournez dans des hôtels prestigieux et des riads d'exception, profitez d'un transport privé avec chauffeur et d'expériences exclusives.
+            {t("private.p1")}
           </p>
-          <p className="font-display italic text-2xl text-burgundy">Laissez-nous créer le voyage qui vous ressemble.</p>
+          <p className="font-display italic text-2xl text-burgundy">{t("private.p2")}</p>
         </div>
         <div className="md:col-span-4 grid grid-cols-2 gap-4">
           <div className="aspect-[4/5] overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import logo from "@/assets/velorya-logo-transparent.png.asset.json";
 import logoHome from "@/assets/velorya-full-logo.jpg.asset.json";
 import heroRiad from "@/assets/hero-riad.jpg.asset.json";
@@ -22,29 +23,25 @@ import exp1 from "@/assets/exp1.jpeg.asset.json";
 import exp2 from "@/assets/exp2.jpeg.asset.json";
 import evenement2 from "@/assets/evenement-2.jpg.asset.json";
 
-const pages = [
-  { id: "home", label: "Accueil", num: "01" },
-  { id: "about", label: "À Propos", num: "02" },
-  { id: "why", label: "Pourquoi le Maroc", num: "03" },
-  { id: "mission", label: "Notre Mission", num: "04" },
-  { id: "mice", label: "Événements", num: "05" },
-  { id: "seminars", label: "Séminaires", num: "06" },
-  { id: "private", label: "Voyages Privés", num: "07" },
-  { id: "circuits", label: "Circuits", num: "08" },
-  { id: "destinations", label: "Destinations", num: "09" },
-  { id: "experiences", label: "Expériences", num: "10" },
-  { id: "contact", label: "Contact", num: "11" },
-];
+const pageIds = ["home","about","why","mission","mice","seminars","private","circuits","destinations","experiences","contact"] as const;
 
 const pageTones: ("dark" | "light" | "sand")[] = [
   "dark", "light", "sand", "light", "light", "light", "light", "sand", "light", "light", "light",
 ];
 
 export default function Home() {
+  const { t, i18n } = useTranslation();
+  const pages = pageIds.map((id, idx) => ({
+    id,
+    label: t(`nav.pages.${id}`),
+    num: String(idx + 1).padStart(2, "0"),
+  }));
   const pagerRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const lang = i18n.language?.startsWith("en") ? "en" : "fr";
+  const toggleLang = () => i18n.changeLanguage(lang === "fr" ? "en" : "fr");
 
   useEffect(() => {
     const el = pagerRef.current;
@@ -112,7 +109,7 @@ export default function Home() {
               Velorya <span className={active === 0 ? "text-gold" : "text-burgundy-deep"}>Event</span>
             </span>
             <span className={`mt-1 text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-[0.28em] sm:tracking-[0.32em] ${active === 0 ? "text-gold/90" : "text-burgundy/70"}`}>
-              Event &amp; Travel Premium Agency
+              {t("brand.tag")}
             </span>
           </span>
         </button>
@@ -123,6 +120,19 @@ export default function Home() {
             <span className="tabular-nums">{String(pages.length).padStart(2, "0")}</span>
           </div>
           <button
+            onClick={toggleLang}
+            aria-label="Change language"
+            className={`flex h-11 items-center gap-1 rounded-full border px-4 text-xs font-medium uppercase tracking-widest transition ${
+              active === 0
+                ? "border-cream/60 text-cream hover:bg-cream/10"
+                : "border-burgundy/40 text-burgundy hover:bg-burgundy hover:text-cream"
+            }`}
+          >
+            <span className={lang === "fr" ? "font-semibold text-gold" : "opacity-70"}>FR</span>
+            <span className="opacity-50">/</span>
+            <span className={lang === "en" ? "font-semibold text-gold" : "opacity-70"}>EN</span>
+          </button>
+          <button
             onClick={() => setMenuOpen((v) => !v)}
             className="flex h-11 items-center gap-2 rounded-full bg-burgundy px-5 text-sm font-medium text-primary-foreground shadow-[var(--shadow-soft)] hover:bg-burgundy-deep transition"
           >
@@ -131,7 +141,7 @@ export default function Home() {
               <span className={`absolute inset-x-0 top-1/2 h-[1.5px] -translate-y-1/2 bg-current transition ${menuOpen ? "opacity-0" : ""}`} />
               <span className={`absolute inset-x-0 bottom-0 h-[1.5px] bg-current transition ${menuOpen ? "-translate-y-[5px] -rotate-45" : ""}`} />
             </span>
-            {menuOpen ? "Fermer" : "Menu"}
+            {menuOpen ? t("nav.close") : t("nav.menu")}
           </button>
         </div>
       </header>
@@ -162,14 +172,14 @@ export default function Home() {
         <button
           onClick={() => goTo(Math.max(0, active - 1))}
           className="fixed left-3 md:left-5 top-1/2 -translate-y-1/2 z-30 h-11 w-11 md:h-12 md:w-12 rounded-full border border-burgundy/30 bg-cream/80 backdrop-blur text-burgundy hover:bg-burgundy hover:text-cream transition flex items-center justify-center"
-          aria-label="Précédent"
+          aria-label={t("nav.prev")}
         >←</button>
       )}
       <button
         onClick={() => goTo(Math.min(pages.length - 1, active + 1))}
         disabled={active === pages.length - 1}
         className="fixed right-3 md:right-5 top-1/2 -translate-y-1/2 z-30 h-11 w-11 md:h-12 md:w-12 rounded-full bg-burgundy text-cream hover:bg-burgundy-deep disabled:opacity-30 transition flex items-center justify-center"
-        aria-label="Suivant"
+        aria-label={t("nav.next")}
       >→</button>
 
       {/* Pagination dots */}
@@ -181,7 +191,7 @@ export default function Home() {
             <button
               key={p.id}
               onClick={() => goTo(i)}
-              aria-label={`Aller à ${p.label}`}
+              aria-label={t("nav.goto", { label: p.label })}
               aria-current={isActive}
               className={`transition-all duration-300 rounded-full ${
                 isActive

@@ -344,6 +344,7 @@ i18n.use(initReactI18next).init({
   fallbackLng: "fr",
   interpolation: { escapeValue: false },
   returnObjects: true,
+  react: { useSuspense: false },
 });
 
 export default i18n;

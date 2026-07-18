@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import logo from "@/assets/velorya-logo-transparent.png.asset.json";
 import logoHome from "@/assets/velorya-full-logo.jpg.asset.json";
 import heroRiad from "@/assets/hero-riad.jpg.asset.json";
@@ -22,29 +23,25 @@ import exp1 from "@/assets/exp1.jpeg.asset.json";
 import exp2 from "@/assets/exp2.jpeg.asset.json";
 import evenement2 from "@/assets/evenement-2.jpg.asset.json";
 
-const pages = [
-  { id: "home", label: "Accueil", num: "01" },
-  { id: "about", label: "À Propos", num: "02" },
-  { id: "why", label: "Pourquoi le Maroc", num: "03" },
-  { id: "mission", label: "Notre Mission", num: "04" },
-  { id: "mice", label: "Événements", num: "05" },
-  { id: "seminars", label: "Séminaires", num: "06" },
-  { id: "private", label: "Voyages Privés", num: "07" },
-  { id: "circuits", label: "Circuits", num: "08" },
-  { id: "destinations", label: "Destinations", num: "09" },
-  { id: "experiences", label: "Expériences", num: "10" },
-  { id: "contact", label: "Contact", num: "11" },
-];
+const pageIds = ["home","about","why","mission","mice","seminars","private","circuits","destinations","experiences","contact"] as const;
 
 const pageTones: ("dark" | "light" | "sand")[] = [
   "dark", "light", "sand", "light", "light", "light", "light", "sand", "light", "light", "light",
 ];
 
 export default function Home() {
+  const { t, i18n } = useTranslation();
+  const pages = pageIds.map((id, idx) => ({
+    id,
+    label: t(`nav.pages.${id}`),
+    num: String(idx + 1).padStart(2, "0"),
+  }));
   const pagerRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const lang = i18n.language?.startsWith("en") ? "en" : "fr";
+  const toggleLang = () => i18n.changeLanguage(lang === "fr" ? "en" : "fr");
 
   useEffect(() => {
     const el = pagerRef.current;
@@ -112,7 +109,7 @@ export default function Home() {
               Velorya <span className={active === 0 ? "text-gold" : "text-burgundy-deep"}>Event</span>
             </span>
             <span className={`mt-1 text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-[0.28em] sm:tracking-[0.32em] ${active === 0 ? "text-gold/90" : "text-burgundy/70"}`}>
-              Event &amp; Travel Premium Agency
+              {t("brand.tag")}
             </span>
           </span>
         </button>
@@ -123,6 +120,19 @@ export default function Home() {
             <span className="tabular-nums">{String(pages.length).padStart(2, "0")}</span>
           </div>
           <button
+            onClick={toggleLang}
+            aria-label="Change language"
+            className={`flex h-11 items-center gap-1 rounded-full border px-4 text-xs font-medium uppercase tracking-widest transition ${
+              active === 0
+                ? "border-cream/60 text-cream hover:bg-cream/10"
+                : "border-burgundy/40 text-burgundy hover:bg-burgundy hover:text-cream"
+            }`}
+          >
+            <span className={lang === "fr" ? "font-semibold text-gold" : "opacity-70"}>FR</span>
+            <span className="opacity-50">/</span>
+            <span className={lang === "en" ? "font-semibold text-gold" : "opacity-70"}>EN</span>
+          </button>
+          <button
             onClick={() => setMenuOpen((v) => !v)}
             className="flex h-11 items-center gap-2 rounded-full bg-burgundy px-5 text-sm font-medium text-primary-foreground shadow-[var(--shadow-soft)] hover:bg-burgundy-deep transition"
           >
@@ -131,7 +141,7 @@ export default function Home() {
               <span className={`absolute inset-x-0 top-1/2 h-[1.5px] -translate-y-1/2 bg-current transition ${menuOpen ? "opacity-0" : ""}`} />
               <span className={`absolute inset-x-0 bottom-0 h-[1.5px] bg-current transition ${menuOpen ? "-translate-y-[5px] -rotate-45" : ""}`} />
             </span>
-            {menuOpen ? "Fermer" : "Menu"}
+            {menuOpen ? t("nav.close") : t("nav.menu")}
           </button>
         </div>
       </header>
@@ -162,14 +172,14 @@ export default function Home() {
         <button
           onClick={() => goTo(Math.max(0, active - 1))}
           className="fixed left-3 md:left-5 top-1/2 -translate-y-1/2 z-30 h-11 w-11 md:h-12 md:w-12 rounded-full border border-burgundy/30 bg-cream/80 backdrop-blur text-burgundy hover:bg-burgundy hover:text-cream transition flex items-center justify-center"
-          aria-label="Précédent"
+          aria-label={t("nav.prev")}
         >←</button>
       )}
       <button
         onClick={() => goTo(Math.min(pages.length - 1, active + 1))}
         disabled={active === pages.length - 1}
         className="fixed right-3 md:right-5 top-1/2 -translate-y-1/2 z-30 h-11 w-11 md:h-12 md:w-12 rounded-full bg-burgundy text-cream hover:bg-burgundy-deep disabled:opacity-30 transition flex items-center justify-center"
-        aria-label="Suivant"
+        aria-label={t("nav.next")}
       >→</button>
 
       {/* Pagination dots */}
@@ -181,7 +191,7 @@ export default function Home() {
             <button
               key={p.id}
               onClick={() => goTo(i)}
-              aria-label={`Aller à ${p.label}`}
+              aria-label={t("nav.goto", { label: p.label })}
               aria-current={isActive}
               className={`transition-all duration-300 rounded-full ${
                 isActive
@@ -233,6 +243,7 @@ function PageShell({ children, tone = "sand", num, kicker, title }: { children: 
 }
 
 function PageHome({ onNext }: { onNext: () => void }) {
+  const { t } = useTranslation();
   return (
     <section className="page relative text-cream">
       <div className="sticky top-0 h-screen w-full">
@@ -250,33 +261,33 @@ function PageHome({ onNext }: { onNext: () => void }) {
           <span className="tabular-nums text-xs md:text-sm uppercase tracking-[0.3em] text-cream/80">01</span>
           <span className="h-px w-10 md:w-14 bg-gold/70" />
           <span className="font-display text-sm md:text-lg lg:text-xl uppercase tracking-[0.32em] text-cream">
-            L'Art du Voyage
+            {t("home.kicker")}
             <span className="mx-2 md:mx-3 text-gold">—</span>
             <span className="italic tracking-[0.22em] text-cream/90 normal-case"></span>
           </span>
         </div>
         <div className="max-w-3xl">
           <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)]">
-            L'excellence du MICE, notre<br />
-            <span className="italic text-gold">signature</span> depuis 25 ans.
+            {t("home.title1")}<br />
+            <span className="italic text-gold">{t("home.titleSignature")}</span> {t("home.title2")}
           </h1>
           <p className="mt-8 text-base md:text-lg text-cream/90 leading-relaxed max-w-2xl">
-            Depuis plus de 25 ans, Velorya Évent, Speicaliste reconnue du MICE,  accompagne les entreprises dans la conception et la réalisation d'événements professionnels d'envergure, avec une approche personnalisée et un niveau d'exigence élevé.
+            {t("home.desc")}
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <button onClick={onNext} className="group flex items-center gap-3 rounded-full bg-cream px-7 py-4 text-sm font-medium text-burgundy hover:bg-gold transition">
-              Découvrir l'agence
+              {t("home.cta")}
               <span className="transition-transform group-hover:translate-x-1">→</span>
             </button>
             <a href="#contact" onClick={(e) => { e.preventDefault(); document.querySelectorAll(".page")[10]?.scrollIntoView(); }} className="text-sm underline underline-offset-4 text-cream/80 hover:text-gold">
-              Nous contacter
+              {t("home.contact")}
             </a>
           </div>
           <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-3xl border-t border-cream/30 pt-8">
-            <StatLight n="25+" l="Années d'expertise" />
-            <StatLight n="100%" l="Satisfaction client" />
-            <StatLight n="24/7" l="Assistance" />
-            <StatLight n="Nationale" l="Couverture toutes villes" />
+            <StatLight n="25+" l={t("home.stats.years")} />
+            <StatLight n="100%" l={t("home.stats.satisfaction")} />
+            <StatLight n="24/7" l={t("home.stats.assistance")} />
+            <StatLight n={t("home.stats.coverageValue")} l={t("home.stats.coverage")} />
           </div>
         </div>
       </div>
@@ -303,21 +314,22 @@ function Stat({ n, l }: { n: string; l: string }) {
 }
 
 function PageAbout() {
+  const { t } = useTranslation();
   return (
-    <PageShell num="02" kicker="À Propos" title="Une équipe passionnée au service de vos projets.">
+    <PageShell num="02" kicker={t("nav.pages.about")} title={t("about.title")}>
       <div className="grid gap-12 md:grid-cols-5">
         <div className="md:col-span-3 space-y-6 text-base md:text-lg leading-relaxed text-foreground/80 max-w-2xl">
-          <p>Depuis plus de 25 ans, nous concevons des voyages qui vont bien au-delà d'un simple déplacement : nous créons des expériences uniques, pensées avec passion, exigence et sens du détail.</p>
-          <p>Grâce à des partenariats solides avec des fournisseurs de confiance et un vaste réseau soigneusement développé, nous bénéficions de conditions privilégiées pour offrir des prestations de grande qualité au meilleur rapport qualité-prix.</p>
-          <p>Qu'il s'agisse de loisirs, de voyages d'affaires ou d'expériences exclusives, notre engagement est de transformer chaque séjour en un souvenir inoubliable, sous le signe de l'excellence, du confort et d'un service personnalisé.</p>
+          <p>{t("about.p1")}</p>
+          <p>{t("about.p2")}</p>
+          <p>{t("about.p3")}</p>
         </div>
         <div className="md:col-span-2 relative">
           <div className="aspect-[4/5] overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
-            <img src={theMenthe.url} alt="Thé à la menthe traditionnel" className="h-full w-full object-cover" />
+            <img src={theMenthe.url} alt={t("about.imgAlt")} className="h-full w-full object-cover" />
           </div>
           <div className="absolute -bottom-6 -left-6 hidden md:block bg-burgundy text-cream p-6 rounded-sm max-w-[220px]">
             <div className="font-display text-2xl italic text-gold">"</div>
-            <p className="text-sm leading-snug">L'art du voyage, à la marocaine.</p>
+            <p className="text-sm leading-snug">{t("about.quote")}</p>
           </div>
         </div>
       </div>
@@ -326,20 +338,21 @@ function PageAbout() {
 }
 
 function PageWhy() {
+  const { t } = useTranslation();
   const items = [
-    { i: "✈", t: "Proximité géographique", d: "À seulement quelques heures de vol de l'Europe et facilement accessible depuis de nombreuses destinations internationales." },
-    { i: "☀", t: "Climat agréable", d: "Un ensoleillement généreux et des températures favorables en toute saison." },
-    { i: "🤝", t: "Hospitalité légendaire", d: "Un accueil chaleureux, une culture de partage et un sens reconnu de la convivialité." },
-    { i: "🛡", t: "Sécurité et stabilité", d: "Une destination rassurante avec des infrastructures touristiques modernes." },
-    { i: "🗣", t: "Population multilingue", d: "Le français, l'arabe, l'espagnol et l'anglais sont largement parlés dans les principales destinations touristiques, facilitant les échanges avec les visiteurs." },
-    { i: "🌍", t: "Diversité des expériences", d: "Villes impériales, désert, montagnes, plages et patrimoine culturel exceptionnel." },
-    { i: "🍽", t: "Richesse gastronomique", d: "Une cuisine authentique, réputée pour ses saveurs et sa diversité." },
-    { i: "💰", t: "Excellent rapport qualité-prix", d: "Une offre touristique adaptée à tous les budgets." },
+    { i: "✈", t: t("why.items.proxT"), d: t("why.items.proxD") },
+    { i: "☀", t: t("why.items.climT"), d: t("why.items.climD") },
+    { i: "🤝", t: t("why.items.hospT"), d: t("why.items.hospD") },
+    { i: "🛡", t: t("why.items.secT"), d: t("why.items.secD") },
+    { i: "🗣", t: t("why.items.langT"), d: t("why.items.langD") },
+    { i: "🌍", t: t("why.items.divT"), d: t("why.items.divD") },
+    { i: "🍽", t: t("why.items.gastT"), d: t("why.items.gastD") },
+    { i: "💰", t: t("why.items.valT"), d: t("why.items.valD") },
   ];
   return (
-    <PageShell tone="sand" num="03" kicker="Destination" title="Pourquoi choisir le Maroc ?">
+    <PageShell tone="sand" num="03" kicker={t("why.kicker")} title={t("why.title")}>
       <p className="mb-10 max-w-2xl text-base md:text-lg text-foreground/70 leading-relaxed">
-        Le Maroc est une destination privilégiée qui allie accessibilité, authenticité et qualité d'accueil, offrant une expérience de voyage unique tout au long de l'année.
+        {t("why.intro")}
       </p>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {items.map((it) => (
@@ -355,18 +368,14 @@ function PageWhy() {
 }
 
 function PageMission() {
-  const services = [
-    "Voyages d'affaires & solutions MICE",
-    "Circuits touristiques & programmes de découverte",
-    "Voyages de loisirs sur-mesure",
-    "Programmes incentive & team building",
-  ];
+  const { t } = useTranslation();
+  const services = t("mission.services", { returnObjects: true }) as string[];
   return (
-    <PageShell num="04" kicker="Notre Mission" title="Transformer chaque projet en expérience mémorable.">
+    <PageShell num="04" kicker={t("mission.kicker")} title={t("mission.title")}>
       <div className="grid gap-12 md:grid-cols-2 items-center">
         <div className="space-y-6">
           <p className="text-base md:text-lg text-foreground/80 leading-relaxed max-w-xl">
-            Nous concevons et organisons des expériences adaptées aux besoins spécifiques de chacun de nos clients, avec expertise, créativité et exigence de qualité.
+            {t("mission.intro")}
           </p>
           <ul className="space-y-4">
             {services.map((s, i) => (
@@ -387,21 +396,23 @@ function PageMission() {
 }
 
 function PageMice() {
+  const { t } = useTranslation();
+  const pillars = t("mice.pillars", { returnObjects: true }) as string[];
   return (
-    <PageShell num="05" kicker="Incentive & Événements" title="L'excellence au service de vos événements d'entreprise.">
+    <PageShell num="05" kicker={t("mice.kicker")} title={t("mice.title")}>
       <div className="grid gap-12 md:grid-cols-5">
         <div className="md:col-span-2 space-y-6 max-w-2xl">
           <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
-            Parce qu'un voyage peut être bien plus qu'un simple déplacement, nous concevons des <strong>programmes Incentive</strong> qui renforcent les relations, stimulent la motivation et valorisent vos équipes. Dans les décors les plus prestigieux du Maroc, chaque expérience est imaginée pour allier excellence, authenticité et émotion.
+            {t("mice.p1Prefix")}<strong>{t("mice.p1Bold")}</strong>{t("mice.p1Suffix")}
           </p>
           <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
-            Des événements exclusifs aux activités de team building, en passant par les soirées de gala et les expériences sur mesure, nous transformons vos objectifs en souvenirs inoubliables.
+            {t("mice.p2")}
           </p>
           <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
-            Faites de chaque instant une source d'inspiration, de chaque destination une réussite, et de chaque événement une expérience d'exception.
+            {t("mice.p3")}
           </p>
           <div className="mt-8 grid grid-cols-2 gap-6">
-            {["Récompenser", "Inspirer", "Rassembler", "Vivre l'Exception"].map((w) => (
+            {pillars.map((w) => (
               <div key={w} className="border-t border-burgundy/20 pt-4">
                 <div className="text-burgundy text-xs uppercase tracking-widest">✦</div>
                 <div className="font-display text-2xl mt-2 text-burgundy">{w}</div>
@@ -419,15 +430,17 @@ function PageMice() {
 }
 
 function PageSeminars() {
+  const { t } = useTranslation();
+  const tags = t("seminars.tags", { returnObjects: true }) as string[];
   return (
-    <PageShell num="06" kicker="Meetings" title="Séminaires & conférences d'exception.">
+    <PageShell num="06" kicker={t("seminars.kicker")} title={t("seminars.title")}>
       <div className="grid gap-10 md:grid-cols-5">
         <div className="md:col-span-2 space-y-6 text-base md:text-lg text-foreground/80 leading-relaxed">
-          <p>Faites de vos événements professionnels un véritable levier de réussite. Nous concevons séminaires, conférences, conventions et réunions d'entreprise sur mesure, dans les plus belles destinations du Maroc.</p>
-          <p className="text-foreground/60 text-base">De la sélection des lieux à la coordination logistique, en passant par les équipements audiovisuels, l'hébergement et les activités complémentaires — chaque détail est orchestré avec rigueur.</p>
+          <p>{t("seminars.p1")}</p>
+          <p className="text-foreground/60 text-base">{t("seminars.p2")}</p>
           <div className="flex flex-wrap gap-2 pt-2">
-            {["Séminaires", "Conférences", "Conventions", "Congrès", "Lancements de produits", "Réunions exécutives"].map((t) => (
-              <span key={t} className="text-xs uppercase tracking-widest border border-burgundy/30 rounded-full px-3 py-1.5 text-burgundy">{t}</span>
+            {tags.map((tag) => (
+              <span key={tag} className="text-xs uppercase tracking-widest border border-burgundy/30 rounded-full px-3 py-1.5 text-burgundy">{tag}</span>
             ))}
           </div>
         </div>
@@ -441,14 +454,15 @@ function PageSeminars() {
 }
 
 function PagePrivate() {
+  const { t } = useTranslation();
   return (
-    <PageShell num="07" kicker="Voyages Privés" title="L'art du voyage privé au Maroc.">
+    <PageShell num="07" kicker={t("private.kicker")} title={t("private.title")}>
       <div className="grid gap-8 md:grid-cols-6 items-center">
         <div className="md:col-span-2 space-y-6 max-w-2xl">
           <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
-            Partez à la découverte des plus beaux trésors du Royaume grâce à un service personnalisé alliant luxe, confort et authenticité. Séjournez dans des hôtels prestigieux et des riads d'exception, profitez d'un transport privé avec chauffeur et d'expériences exclusives.
+            {t("private.p1")}
           </p>
-          <p className="font-display italic text-2xl text-burgundy">Laissez-nous créer le voyage qui vous ressemble.</p>
+          <p className="font-display italic text-2xl text-burgundy">{t("private.p2")}</p>
         </div>
         <div className="md:col-span-4 grid grid-cols-2 gap-4">
           <div className="aspect-[4/5] overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
@@ -464,18 +478,12 @@ function PagePrivate() {
 }
 
 function PageCircuits() {
-  const items = [
-    { t: "Villes Impériales", d: "Marrakech, Fès, Meknès, Rabat." },
-    { t: "Désert du Sahara", d: "Merzouga, Mhamid, bivouacs." },
-    { t: "Atlas", d: "Randonnées et villages berbères." },
-    { t: "Côte Atlantique", d: "Essaouira, El Jadida, Taghazout, Dakhla." },
-    { t: "Kasbahs & Oasis", d: "Aït-Ben-Haddou, Skoura, Draa." },
-    { t: "Gorges", d: "Gorges de Todra, Gorges de Dades." },
-  ];
+  const { t } = useTranslation();
+  const items = t("circuits.items", { returnObjects: true }) as { t: string; d: string }[];
   return (
-    <PageShell tone="sand" num="08" kicker="Circuits" title="Explorez les plus beaux circuits du Maroc.">
+    <PageShell tone="sand" num="08" kicker={t("circuits.kicker")} title={t("circuits.title")}>
       <p className="mb-12 max-w-2xl text-base md:text-lg text-foreground/70 leading-relaxed">
-        <strong>Chaque Circuit Raconte une Histoire :</strong> Des ruelles envoûtantes de Marrakech aux dunes infinies de Merzouga, des sommets de l'Atlas aux rivages d'Essaouira, nos circuits vous invitent à vivre le Maroc autrement. Chaque étape est une immersion dans un patrimoine unique, entre traditions, gastronomie et paysages d'exception.
+        <strong>{t("circuits.intro1")}</strong>{t("circuits.intro2")}
       </p>
       <div className="mb-10 grid grid-cols-3 grid-rows-[repeat(4,minmax(0,1fr))] md:grid-rows-[repeat(4,minmax(0,1fr))] gap-2 md:gap-3 aspect-[3/2.2]">
         <div className="col-span-2 row-span-2 overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
@@ -511,19 +519,10 @@ function PageCircuits() {
 }
 
 function PageDestinations() {
-  const cities = [
-    { t: "Marrakech", d: "La Ville Ocre — palais, jardins et souks effervescents." },
-    { t: "Fès", d: "Un musée à ciel ouvert et la plus ancienne médina." },
-    { t: "Chefchaouen", d: "La ville bleue nichée dans les montagnes du Rif." },
-    { t: "Casablanca", d: "L'énergie de la plus grande métropole du Maroc." },
-    { t: "Rabat", d: "Une capitale raffinée et verdoyante." },
-    { t: "Essaouira", d: "Cité maritime, remparts et couchers de soleil." },
-    { t: "Taghazout", d: "Village de surf, plages dorées, ambiance bohème." },
-    { t: "Ouarzazate", d: "Sur les traces des caravanes et du cinéma." },
-    { t: "Merzouga", d: "Une expérience hors du temps dans le désert." },
-  ];
+  const { t } = useTranslation();
+  const cities = t("destinations.cities", { returnObjects: true }) as { t: string; d: string }[];
   return (
-    <PageShell num="09" kicker="Destinations" title="Des destinations qui font rêver.">
+    <PageShell num="09" kicker={t("destinations.kicker")} title={t("destinations.title")}>
       <div className="grid gap-x-10 gap-y-6 md:grid-cols-3">
         {cities.map((c, i) => (
           <div key={c.t} className="flex gap-5 border-t border-burgundy/15 pt-5">
@@ -540,20 +539,12 @@ function PageDestinations() {
 }
 
 function PageExperiences() {
-  const exps = [
-    ["🎈", "Vol en montgolfière", "Levers de soleil au-dessus de paysages magiques."],
-    ["🚗", "Voiture vintage", "Les plus belles routes en collection."],
-    ["🐪", "Dîner privé au désert", "Une soirée sous les étoiles."],
-    ["🏍", "Quad & buggy", "L'adrénaline dans les dunes."],
-    ["🐎", "Balade à cheval / chameau", "Explorer au rythme de la nature."],
-    ["⛵", "Yacht", "Une journée en mer haut de gamme."],
-    ["🍽", "Expériences gastronomiques", "Cours de cuisine et dîners chez l'habitant."],
-    ["💆", "Spa & bien-être", "Hammams et spa d'exception."],
-    ["📸", "Séance photo pro", "Immortaliser les lieux emblématiques."],
-    ["🏍", "Side-car vintage", "Le Maroc autrement, en moto de collection."],
-  ];
+  const { t } = useTranslation();
+  const icons = ["🎈","🚗","🐪","🏍","🐎","⛵","🍽","💆","📸","🏍"];
+  const rows = t("experiences.items", { returnObjects: true }) as [string, string][];
+  const exps = rows.map((r, i) => [icons[i], r[0], r[1]] as [string, string, string]);
   return (
-    <PageShell num="10" kicker="Expériences" title="L'excellence au cœur de votre voyage.">
+    <PageShell num="10" kicker={t("experiences.kicker")} title={t("experiences.title")}>
       <div className="mb-10 grid grid-cols-2 gap-4">
         <div className="overflow-hidden rounded-sm shadow-[var(--shadow-elegant)] aspect-[4/3]">
           <img src={exp1.url} alt="Quad dans le désert" className="w-full h-full object-cover" />
@@ -578,39 +569,40 @@ function PageExperiences() {
 }
 
 function PageContact() {
+  const { t } = useTranslation();
   return (
-    <PageShell num="11" kicker="Contact" title="Parlons de votre prochain voyage.">
+    <PageShell num="11" kicker={t("contact.kicker")} title={t("contact.title")}>
       <div className="grid gap-16 md:grid-cols-2 items-start">
         <div className="space-y-8">
           <div>
-            <div className="text-xs uppercase tracking-widest text-burgundy mb-2">Bureau</div>
-            <p className="font-display text-2xl text-foreground">Casablanca</p>
-            <p className="text-foreground/70 mt-1">RDC 32, Rue Mohammed El Houdaikie<br />Maârif — Casablanca, Maroc</p>
+            <div className="text-xs uppercase tracking-widest text-burgundy mb-2">{t("contact.office")}</div>
+            <p className="font-display text-2xl text-foreground">{t("contact.city")}</p>
+            <p className="text-foreground/70 mt-1">{t("contact.address")}<br />{t("contact.addressLine2")}</p>
           </div>
           <div>
-            <div className="text-xs uppercase tracking-widest text-burgundy mb-2">Email</div>
+            <div className="text-xs uppercase tracking-widest text-burgundy mb-2">{t("contact.email")}</div>
             <a href="mailto:office@velorya-event.com" className="font-display text-2xl text-foreground hover:text-burgundy transition">office@velorya-event.com</a>
           </div>
           <div>
-            <div className="text-xs uppercase tracking-widest text-burgundy mb-2">Téléphone</div>
+            <div className="text-xs uppercase tracking-widest text-burgundy mb-2">{t("contact.phone")}</div>
             <a href="tel:+212661313485" className="font-display text-2xl text-foreground hover:text-burgundy transition">+212 661 31 34 85</a>
           </div>
           <a href="mailto:office@velorya-event.com" className="inline-flex items-center gap-3 rounded-full bg-burgundy px-7 py-4 text-sm font-medium text-cream hover:bg-burgundy-deep transition">
-            Démarrer un projet <span>→</span>
+            {t("contact.cta")} <span>→</span>
           </a>
         </div>
         <div className="relative">
           <blockquote className="font-display text-3xl md:text-4xl italic leading-tight text-burgundy max-w-md">
-            "Le monde est un livre, ceux qui ne voyagent pas n'en lisent qu'une page."
+            {t("contact.quote")}
           </blockquote>
           <div className="mt-10 flex items-center gap-4">
             <img src={logo.url} alt="Velorya Event" className="h-16 w-16 rounded-full object-cover bg-white ring-1 ring-burgundy/20" />
             <div>
               <div className="font-display text-xl text-burgundy">Velorya Event</div>
-              <div className="text-xs uppercase tracking-widest text-muted-foreground">25 ans d'excellence</div>
+              <div className="text-xs uppercase tracking-widest text-muted-foreground">{t("contact.excellence")}</div>
             </div>
           </div>
-          <p className="mt-14 text-xs text-muted-foreground">© {new Date().getFullYear()} Velorya Event. Tous droits réservés.</p>
+          <p className="mt-14 text-xs text-muted-foreground">{t("contact.rights", { year: new Date().getFullYear() })}</p>
         </div>
       </div>
     </PageShell>

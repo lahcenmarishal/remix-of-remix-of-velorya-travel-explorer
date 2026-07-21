@@ -22,11 +22,20 @@ import mongolfiere from "@/assets/mongolfiere.jpg.asset.json";
 import exp1 from "@/assets/exp1.jpeg.asset.json";
 import exp2 from "@/assets/exp2.jpeg.asset.json";
 import evenement2 from "@/assets/evenement-2.jpg.asset.json";
+import logoKoesio from "@/assets/koesio.png.asset.json";
+import logoFerrari from "@/assets/ferr.png.asset.json";
+import logoCaf from "@/assets/caaf.jpg.asset.json";
+import logoUniglobe from "@/assets/bel.png.asset.json";
+import logoFresenius from "@/assets/kapi.jpg.asset.json";
+import logoAllianz from "@/assets/alli.png.asset.json";
+import logoBenetti from "@/assets/ben.gif.asset.json";
+import logoFintyre from "@/assets/fin.jpg.asset.json";
+import logoOticon from "@/assets/oti.png.asset.json";
 
-const pageIds = ["home","about","why","mission","mice","seminars","private","circuits","destinations","experiences","contact"] as const;
+const pageIds = ["home","about","why","mission","mice","seminars","private","circuits","destinations","experiences","events","contact"] as const;
 
 const pageTones: ("dark" | "light" | "sand")[] = [
-  "dark", "light", "sand", "light", "light", "light", "light", "sand", "light", "light", "light",
+  "dark", "light", "sand", "light", "light", "light", "light", "sand", "light", "light", "light", "light",
 ];
 
 export default function Home() {
@@ -217,6 +226,7 @@ export default function Home() {
         <PageCircuits />
         <PageDestinations />
         <PageExperiences />
+        <PageEvents />
         <PageContact />
       </div>
     </div>
@@ -571,7 +581,7 @@ function PageExperiences() {
 function PageContact() {
   const { t } = useTranslation();
   return (
-    <PageShell num="11" kicker={t("contact.kicker")} title={t("contact.title")}>
+    <PageShell num="12" kicker={t("contact.kicker")} title={t("contact.title")}>
       <div className="grid gap-16 md:grid-cols-2 items-start">
         <div className="space-y-8">
           <div>

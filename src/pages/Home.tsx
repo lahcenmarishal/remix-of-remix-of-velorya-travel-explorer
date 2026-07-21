@@ -583,6 +583,7 @@ function PageContact() {
   return (
     <PageShell num="12" kicker={t("contact.kicker")} title={t("contact.title")}>
       <div className="grid gap-16 md:grid-cols-2 items-start">
+
         <div className="space-y-8">
           <div>
             <div className="text-xs uppercase tracking-widest text-burgundy mb-2">{t("contact.office")}</div>

@@ -582,6 +582,7 @@ function PageContact() {
   const { t } = useTranslation();
   return (
     <PageShell num="12" kicker={t("contact.kicker")} title={t("contact.title")}>
+*** PLACEHOLDER ***
       <div className="grid gap-16 md:grid-cols-2 items-start">
         <div className="space-y-8">
           <div>

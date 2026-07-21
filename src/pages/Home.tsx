@@ -618,3 +618,51 @@ function PageContact() {
     </PageShell>
   );
 }
+
+function PageEvents() {
+  const { t } = useTranslation();
+  const clients = [
+    { logo: logoKoesio, name: "Koesio", ctx: t("events.clients.koesio"), pax: 1200 },
+    { logo: logoFerrari, name: "Ferrari", ctx: t("events.clients.ferrari"), pax: 600 },
+    { logo: logoCaf, name: "CAF", ctx: t("events.clients.caf") },
+    { logo: null as any, name: t("events.names.astrid"), ctx: t("events.clients.astrid"), pax: 600 },
+    { logo: logoUniglobe, name: "Uniglobe", ctx: t("events.clients.uniglobe"), pax: 300 },
+    { logo: logoFresenius, name: "Fresenius Kabi", ctx: t("events.clients.fresenius"), pax: 120 },
+    { logo: logoAllianz, name: "Allianz", ctx: t("events.clients.allianz"), pax: 200 },
+    { logo: logoBenetti, name: "Benetti", ctx: t("events.clients.benetti"), pax: 200 },
+    { logo: logoFintyre, name: "Fintyre / Franco Gomme", ctx: t("events.clients.fintyre"), pax: 160 },
+    { logo: logoOticon, name: "Oticon", ctx: t("events.clients.oticon"), pax: 180 },
+  ];
+  return (
+    <PageShell num="11" kicker={t("events.kicker")} title={t("events.title")}>
+      <div className="max-w-3xl space-y-4 text-base md:text-lg text-foreground/80 leading-relaxed mb-10">
+        <p>{t("events.p1")}</p>
+        <p className="text-foreground/60">{t("events.p2")}</p>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        {clients.map((c) => (
+          <div key={c.name} className="group flex flex-col items-center justify-between gap-4 rounded-sm border border-burgundy/15 bg-cream/60 backdrop-blur p-5 hover:border-burgundy/50 hover:bg-cream transition">
+            <div className="flex h-20 w-full items-center justify-center">
+              {c.logo ? (
+                <img src={c.logo.url} alt={c.name} className="max-h-16 max-w-[80%] object-contain" loading="lazy" />
+              ) : (
+                <div className="font-display text-lg text-burgundy text-center leading-tight">{c.name}</div>
+              )}
+            </div>
+            <div className="text-center">
+              {c.logo && <div className="font-display text-sm text-burgundy mb-1">{c.name}</div>}
+              <div className="text-[11px] uppercase tracking-widest text-foreground/60">{c.ctx}</div>
+              {c.pax && (
+                <div className="mt-2 inline-flex items-baseline gap-1">
+                  <span className="font-display text-2xl text-gold tabular-nums">{c.pax}</span>
+                  <span className="text-[10px] uppercase tracking-widest text-burgundy">{t("events.pax")}</span>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+      <p className="mt-10 text-sm italic text-foreground/60">{t("events.more")}</p>
+    </PageShell>
+  );
+}

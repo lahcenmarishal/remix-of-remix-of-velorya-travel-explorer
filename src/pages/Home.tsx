@@ -22,11 +22,20 @@ import mongolfiere from "@/assets/mongolfiere.jpg.asset.json";
 import exp1 from "@/assets/exp1.jpeg.asset.json";
 import exp2 from "@/assets/exp2.jpeg.asset.json";
 import evenement2 from "@/assets/evenement-2.jpg.asset.json";
+import logoKoesio from "@/assets/koesio.png.asset.json";
+import logoFerrari from "@/assets/ferr.png.asset.json";
+import logoCaf from "@/assets/caaf.jpg.asset.json";
+import logoUniglobe from "@/assets/bel.png.asset.json";
+import logoFresenius from "@/assets/kapi.jpg.asset.json";
+import logoAllianz from "@/assets/alli.png.asset.json";
+import logoBenetti from "@/assets/ben.gif.asset.json";
+import logoFintyre from "@/assets/fin.jpg.asset.json";
+import logoOticon from "@/assets/oti.png.asset.json";
 
-const pageIds = ["home","about","why","mission","mice","seminars","private","circuits","destinations","experiences","contact"] as const;
+const pageIds = ["home","about","why","mission","mice","seminars","private","circuits","destinations","experiences","events","contact"] as const;
 
 const pageTones: ("dark" | "light" | "sand")[] = [
-  "dark", "light", "sand", "light", "light", "light", "light", "sand", "light", "light", "light",
+  "dark", "light", "sand", "light", "light", "light", "light", "sand", "light", "light", "light", "light",
 ];
 
 export default function Home() {
@@ -217,6 +226,7 @@ export default function Home() {
         <PageCircuits />
         <PageDestinations />
         <PageExperiences />
+        <PageEvents />
         <PageContact />
       </div>
     </div>
@@ -571,7 +581,7 @@ function PageExperiences() {
 function PageContact() {
   const { t } = useTranslation();
   return (
-    <PageShell num="11" kicker={t("contact.kicker")} title={t("contact.title")}>
+    <PageShell num="12" kicker={t("contact.kicker")} title={t("contact.title")}>
       <div className="grid gap-16 md:grid-cols-2 items-start">
         <div className="space-y-8">
           <div>
@@ -605,6 +615,54 @@ function PageContact() {
           <p className="mt-14 text-xs text-muted-foreground">{t("contact.rights", { year: new Date().getFullYear() })}</p>
         </div>
       </div>
+    </PageShell>
+  );
+}
+
+function PageEvents() {
+  const { t } = useTranslation();
+  const clients = [
+    { logo: logoKoesio, name: "Koesio", ctx: t("events.clients.koesio"), pax: 1200 },
+    { logo: logoFerrari, name: "Ferrari", ctx: t("events.clients.ferrari"), pax: 600 },
+    { logo: logoCaf, name: "CAF", ctx: t("events.clients.caf") },
+    { logo: null as any, name: t("events.names.astrid"), ctx: t("events.clients.astrid"), pax: 600 },
+    { logo: logoUniglobe, name: "Uniglobe", ctx: t("events.clients.uniglobe"), pax: 300 },
+    { logo: logoFresenius, name: "Fresenius Kabi", ctx: t("events.clients.fresenius"), pax: 120 },
+    { logo: logoAllianz, name: "Allianz", ctx: t("events.clients.allianz"), pax: 200 },
+    { logo: logoBenetti, name: "Benetti", ctx: t("events.clients.benetti"), pax: 200 },
+    { logo: logoFintyre, name: "Fintyre / Franco Gomme", ctx: t("events.clients.fintyre"), pax: 160 },
+    { logo: logoOticon, name: "Oticon", ctx: t("events.clients.oticon"), pax: 180 },
+  ];
+  return (
+    <PageShell num="11" kicker={t("events.kicker")} title={t("events.title")}>
+      <div className="max-w-3xl space-y-4 text-base md:text-lg text-foreground/80 leading-relaxed mb-10">
+        <p>{t("events.p1")}</p>
+        <p className="text-foreground/60">{t("events.p2")}</p>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        {clients.map((c) => (
+          <div key={c.name} className="group flex flex-col items-center justify-between gap-4 rounded-sm border border-burgundy/15 bg-cream/60 backdrop-blur p-5 hover:border-burgundy/50 hover:bg-cream transition">
+            <div className="flex h-20 w-full items-center justify-center">
+              {c.logo ? (
+                <img src={c.logo.url} alt={c.name} className="max-h-16 max-w-[80%] object-contain" loading="lazy" />
+              ) : (
+                <div className="font-display text-lg text-burgundy text-center leading-tight">{c.name}</div>
+              )}
+            </div>
+            <div className="text-center">
+              {c.logo && <div className="font-display text-sm text-burgundy mb-1">{c.name}</div>}
+              <div className="text-[11px] uppercase tracking-widest text-foreground/60">{c.ctx}</div>
+              {c.pax && (
+                <div className="mt-2 inline-flex items-baseline gap-1">
+                  <span className="font-display text-2xl text-gold tabular-nums">{c.pax}</span>
+                  <span className="text-[10px] uppercase tracking-widest text-burgundy">{t("events.pax")}</span>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+      <p className="mt-10 text-sm italic text-foreground/60">{t("events.more")}</p>
     </PageShell>
   );
 }

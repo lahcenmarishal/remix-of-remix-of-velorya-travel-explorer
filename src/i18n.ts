@@ -15,6 +15,7 @@ const resources = {
         goto: "Aller à {{label}}",
         pages: {
           home: "Accueil",
+          activities: "Activités",
           about: "À Propos",
           why: "Pourquoi le Maroc",
           mission: "Notre Mission",
@@ -43,6 +44,15 @@ const resources = {
           coverage: "Couverture toutes villes",
           coverageValue: "Nationale",
         },
+      },
+      activities: {
+        kicker: "Immersion",
+        title: "Des Activités pour tous les Goûts.",
+        subtitle: "Découvrez des expériences authentiques au cœur du Maroc.",
+        p1: "Bien plus qu'un simple séjour, nous vous invitons à vivre une véritable immersion à travers une sélection d'activités adaptées à toutes les envies.",
+        p2: "Partez à l'aventure lors d'une balade en quad ou en buggy à travers les paysages spectaculaires du désert d'Agafay, admirez les panoramas uniques et profitez d'un moment d'évasion en pleine nature.",
+        p3: "Laissez-vous séduire par la magie des soirées marocaines, rythmées par la musique, les danses traditionnelles et une ambiance chaleureuse autour d'un délicieux dîner sous les étoiles.",
+        p4: "Que vous soyez en quête d'aventure, de découverte culturelle, de détente ou de partage, nous créons des expériences sur mesure pour faire de votre séjour un souvenir exceptionnel.",
       },
       about: {
         title: "Une équipe passionnée au service de vos projets.",
@@ -206,6 +216,7 @@ const resources = {
         goto: "Go to {{label}}",
         pages: {
           home: "Home",
+          activities: "Activities",
           about: "About",
           why: "Why Morocco",
           mission: "Our Mission",
@@ -234,6 +245,15 @@ const resources = {
           coverage: "Coverage across all cities",
           coverageValue: "Nationwide",
         },
+      },
+      activities: {
+        kicker: "Immersion",
+        title: "Activities for every taste.",
+        subtitle: "Discover authentic experiences at the heart of Morocco.",
+        p1: "Far more than a simple stay, we invite you to a true immersion through a curated selection of activities suited to every desire.",
+        p2: "Set off on an adventure with a quad or buggy ride across the spectacular landscapes of the Agafay desert, take in unique panoramas and enjoy a moment of escape in the heart of nature.",
+        p3: "Let yourself be enchanted by the magic of Moroccan evenings, animated by music, traditional dances and a warm atmosphere around a delicious dinner under the stars.",
+        p4: "Whether you seek adventure, cultural discovery, relaxation or sharing, we craft bespoke experiences to turn your stay into an exceptional memory.",
       },
       about: {
         title: "A passionate team at the service of your projects.",

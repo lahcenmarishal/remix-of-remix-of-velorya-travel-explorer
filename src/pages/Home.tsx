@@ -627,11 +627,6 @@ function PageContact() {
 
 function PageEvents() {
   const { t } = useTranslation();
-  return _PageEventsImpl(t);
-}
-
-function _PageEventsImpl(_t: any) { return null as any; }
-  const { t } = useTranslation();
   const clients = [
     { logo: logoKoesio, name: "Koesio", ctx: t("events.clients.koesio"), pax: 1200 },
     { logo: logoFerrari, name: "Ferrari", ctx: t("events.clients.ferrari"), pax: 600 },

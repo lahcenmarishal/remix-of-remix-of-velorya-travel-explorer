@@ -333,10 +333,6 @@ function PageAbout() {
   const { t } = useTranslation();
   return (
     <PageShell num="03" kicker={t("nav.pages.about")} title={t("about.title")}>
-      <></>
-      {null}
-      {undefined}
-      {/* PageActivities is defined below */}
       <div className="grid gap-12 md:grid-cols-5">
         <div className="md:col-span-3 space-y-6 text-base md:text-lg leading-relaxed text-foreground/80 max-w-2xl">
           <p>{t("about.p1")}</p>

@@ -626,6 +626,59 @@ function PageContact() {
 }
 
 function PageEvents() {
+  return <PageEventsInner />;
+}
+
+function PageActivities() {
+  const { t } = useTranslation();
+  const videos = [activityVideo1, activityVideo2, activityVideo3, activityVideo4, activityVideo5];
+  const [idx, setIdx] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setIdx((i) => (i + 1) % videos.length), 7000);
+    return () => clearInterval(id);
+  }, [videos.length]);
+  return (
+    <PageShell num="02" kicker={t("activities.kicker")} title={t("activities.title")}>
+      <div className="grid gap-10 md:grid-cols-5 items-start">
+        <div className="md:col-span-2 space-y-5 text-base md:text-[17px] text-foreground/80 leading-relaxed max-w-xl">
+          <p className="font-display text-xl md:text-2xl italic text-burgundy">{t("activities.subtitle")}</p>
+          <p>{t("activities.p1")}</p>
+          <p>{t("activities.p2")}</p>
+          <p>{t("activities.p3")}</p>
+          <p className="text-foreground/70">{t("activities.p4")}</p>
+        </div>
+        <div className="md:col-span-3">
+          <div className="relative w-full aspect-[9/16] md:aspect-[4/5] max-h-[70vh] mx-auto overflow-hidden rounded-sm shadow-[var(--shadow-elegant)] bg-black">
+            {videos.map((v, i) => (
+              <video
+                key={i}
+                src={v.url}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${i === idx ? "opacity-100" : "opacity-0"}`}
+              />
+            ))}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+              {videos.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setIdx(i)}
+                  aria-label={`Video ${i + 1}`}
+                  className={`h-1.5 rounded-full transition-all ${i === idx ? "w-6 bg-gold" : "w-1.5 bg-cream/60"}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </PageShell>
+  );
+}
+
+function PageEventsInner() {
   const { t } = useTranslation();
   const clients = [
     { logo: logoKoesio, name: "Koesio", ctx: t("events.clients.koesio"), pax: 1200 },

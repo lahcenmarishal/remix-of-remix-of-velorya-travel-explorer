@@ -31,11 +31,16 @@ import logoAllianz from "@/assets/alli.png.asset.json";
 import logoBenetti from "@/assets/ben.gif.asset.json";
 import logoFintyre from "@/assets/fin.jpg.asset.json";
 import logoOticon from "@/assets/oti.png.asset.json";
+import activityVideo1 from "@/assets/activity-1.mp4.asset.json";
+import activityVideo2 from "@/assets/activity-2.mp4.asset.json";
+import activityVideo3 from "@/assets/activity-3.mp4.asset.json";
+import activityVideo4 from "@/assets/activity-4.mp4.asset.json";
+import activityVideo5 from "@/assets/activity-5.mp4.asset.json";
 
-const pageIds = ["home","about","why","mission","mice","seminars","private","circuits","destinations","experiences","events","contact"] as const;
+const pageIds = ["home","activities","about","why","mission","mice","seminars","private","circuits","destinations","experiences","events","contact"] as const;
 
 const pageTones: ("dark" | "light" | "sand")[] = [
-  "dark", "light", "sand", "light", "light", "light", "light", "sand", "light", "light", "light", "light",
+  "dark", "light", "light", "sand", "light", "light", "light", "light", "sand", "light", "light", "light", "light",
 ];
 
 export default function Home() {
@@ -217,6 +222,7 @@ export default function Home() {
       {/* Pager */}
       <div ref={pagerRef} className="pager">
         <PageHome onNext={() => goTo(1)} />
+        <PageActivities />
         <PageAbout />
         <PageWhy />
         <PageMission />

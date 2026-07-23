@@ -629,7 +629,7 @@ function PageEvents() {
 
 function PageActivities() {
   const { t } = useTranslation();
-  const videos = [activityVideo1, activityVideo2, activityVideo3, activityVideo4, activityVideo5];
+  const videos = [activityVideo1, activityVideo2, activityVideo3];
   const [idx, setIdx] = useState(0);
   useEffect(() => {
     const id = setInterval(() => setIdx((i) => (i + 1) % videos.length), 7000);

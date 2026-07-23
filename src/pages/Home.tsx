@@ -34,8 +34,6 @@ import logoOticon from "@/assets/oti.png.asset.json";
 import activityVideo1 from "@/assets/activity-1.mp4.asset.json";
 import activityVideo2 from "@/assets/activity-2.mp4.asset.json";
 import activityVideo3 from "@/assets/activity-3.mp4.asset.json";
-import activityVideo4 from "@/assets/activity-4.mp4.asset.json";
-import activityVideo5 from "@/assets/activity-5.mp4.asset.json";
 
 const pageIds = ["home","activities","about","why","mission","mice","seminars","private","circuits","destinations","experiences","events","contact"] as const;
 
@@ -162,18 +160,18 @@ export default function Home() {
 
       {/* Menu overlay */}
       <div
-        className={`fixed inset-0 z-40 transition-all duration-500 ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+        className={`fixed inset-0 z-40 overflow-y-auto transition-all duration-500 ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
         style={{ background: "var(--gradient-hero)" }}
       >
-        <nav className="flex h-full flex-col items-start justify-center gap-2 px-10 md:px-24">
+        <nav className="flex min-h-full flex-col items-start justify-center gap-1 md:gap-2 px-10 md:px-24 py-24">
           {pages.map((p, i) => (
             <button
               key={p.id}
               onClick={() => goTo(i)}
-              className="group flex items-baseline gap-6 text-left"
+              className="group flex items-baseline gap-4 md:gap-6 text-left"
             >
               <span className="text-xs tabular-nums text-cream/50">{p.num}</span>
-              <span className={`font-display text-4xl md:text-6xl font-medium transition-all ${active === i ? "text-gold" : "text-cream/80 group-hover:text-gold group-hover:translate-x-2"}`}>
+              <span className={`font-display text-2xl md:text-5xl font-medium leading-tight transition-all ${active === i ? "text-gold" : "text-cream/80 group-hover:text-gold group-hover:translate-x-2"}`}>
                 {p.label}
               </span>
             </button>
@@ -631,7 +629,7 @@ function PageEvents() {
 
 function PageActivities() {
   const { t } = useTranslation();
-  const videos = [activityVideo1, activityVideo2, activityVideo3, activityVideo4, activityVideo5];
+  const videos = [activityVideo1, activityVideo2, activityVideo3];
   const [idx, setIdx] = useState(0);
   useEffect(() => {
     const id = setInterval(() => setIdx((i) => (i + 1) % videos.length), 7000);

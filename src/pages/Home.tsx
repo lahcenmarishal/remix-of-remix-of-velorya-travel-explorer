@@ -34,8 +34,6 @@ import logoOticon from "@/assets/oti.png.asset.json";
 import activityVideo1 from "@/assets/activity-1.mp4.asset.json";
 import activityVideo2 from "@/assets/activity-2.mp4.asset.json";
 import activityVideo3 from "@/assets/activity-3.mp4.asset.json";
-import activityVideo4 from "@/assets/activity-4.mp4.asset.json";
-import activityVideo5 from "@/assets/activity-5.mp4.asset.json";
 
 const pageIds = ["home","activities","about","why","mission","mice","seminars","private","circuits","destinations","experiences","events","contact"] as const;
 

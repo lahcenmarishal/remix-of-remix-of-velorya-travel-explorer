@@ -35,10 +35,10 @@ import activityVideo1 from "@/assets/activity-1.mp4.asset.json";
 import activityVideo2 from "@/assets/activity-2.mp4.asset.json";
 import activityVideo3 from "@/assets/activity-3.mp4.asset.json";
 
-const pageIds = ["home","activities","about","why","mission","mice","seminars","private","circuits","destinations","experiences","events","contact"] as const;
+const pageIds = ["home","about","mission","mice","seminars","private","circuits","destinations","experiences","events","why","contact"] as const;
 
 const pageTones: ("dark" | "light" | "sand")[] = [
-  "dark", "light", "light", "sand", "light", "light", "light", "light", "sand", "light", "light", "light", "light",
+  "dark", "light", "light", "light", "light", "light", "sand", "light", "light", "light", "sand", "light",
 ];
 
 export default function Home() {
@@ -220,9 +220,7 @@ export default function Home() {
       {/* Pager */}
       <div ref={pagerRef} className="pager">
         <PageHome onNext={() => goTo(1)} />
-        <PageActivities />
         <PageAbout />
-        <PageWhy />
         <PageMission />
         <PageMice />
         <PageSeminars />
@@ -231,6 +229,7 @@ export default function Home() {
         <PageDestinations />
         <PageExperiences />
         <PageEvents />
+        <PageWhy />
         <PageContact />
       </div>
     </div>
@@ -293,7 +292,7 @@ function PageHome({ onNext }: { onNext: () => void }) {
               {t("home.cta")}
               <span className="transition-transform group-hover:translate-x-1">→</span>
             </button>
-            <a href="#contact" onClick={(e) => { e.preventDefault(); document.querySelectorAll(".page")[10]?.scrollIntoView(); }} className="text-sm underline underline-offset-4 text-cream/80 hover:text-gold">
+            <a href="#contact" onClick={(e) => { e.preventDefault(); document.querySelectorAll(".page")[11]?.scrollIntoView(); }} className="text-sm underline underline-offset-4 text-cream/80 hover:text-gold">
               {t("home.contact")}
             </a>
           </div>
@@ -330,7 +329,7 @@ function Stat({ n, l }: { n: string; l: string }) {
 function PageAbout() {
   const { t } = useTranslation();
   return (
-    <PageShell num="03" kicker={t("nav.pages.about")} title={t("about.title")}>
+    <PageShell num="02" kicker={t("nav.pages.about")} title={t("about.title")}>
       <div className="grid gap-12 md:grid-cols-5">
         <div className="md:col-span-3 space-y-6 text-base md:text-lg leading-relaxed text-foreground/80 max-w-2xl">
           <p>{t("about.p1")}</p>
@@ -364,7 +363,7 @@ function PageWhy() {
     { i: "💰", t: t("why.items.valT"), d: t("why.items.valD") },
   ];
   return (
-    <PageShell tone="sand" num="04" kicker={t("why.kicker")} title={t("why.title")}>
+    <PageShell tone="sand" num="11" kicker={t("why.kicker")} title={t("why.title")}>
       <p className="mb-10 max-w-2xl text-base md:text-lg text-foreground/70 leading-relaxed">
         {t("why.intro")}
       </p>
@@ -384,8 +383,14 @@ function PageWhy() {
 function PageMission() {
   const { t } = useTranslation();
   const services = t("mission.services", { returnObjects: true }) as string[];
+  const videos = [activityVideo1, activityVideo2, activityVideo3];
+  const [idx, setIdx] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setIdx((i) => (i + 1) % videos.length), 7000);
+    return () => clearInterval(id);
+  }, [videos.length]);
   return (
-    <PageShell num="05" kicker={t("mission.kicker")} title={t("mission.title")}>
+    <PageShell num="03" kicker={t("mission.kicker")} title={t("mission.title")}>
       <div className="grid gap-12 md:grid-cols-2 items-center">
         <div className="space-y-6">
           <p className="text-base md:text-lg text-foreground/80 leading-relaxed max-w-xl">
@@ -400,9 +405,31 @@ function PageMission() {
             ))}
           </ul>
         </div>
-        <div className="grid grid-cols-2 gap-4">
-          <img src={atelier.url} alt="Atelier tissage" className="aspect-[3/4] object-cover rounded-sm shadow-[var(--shadow-soft)] mt-8" />
-          <img src={raid4x4.url} alt="Raid 4x4" className="aspect-[3/4] object-cover rounded-sm shadow-[var(--shadow-soft)]" />
+        <div>
+          <div className="relative w-full aspect-[9/16] md:aspect-[4/5] max-h-[70vh] mx-auto overflow-hidden rounded-sm shadow-[var(--shadow-elegant)] bg-black">
+            {videos.map((v, i) => (
+              <video
+                key={i}
+                src={v.url}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${i === idx ? "opacity-100" : "opacity-0"}`}
+              />
+            ))}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+              {videos.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setIdx(i)}
+                  aria-label={`Video ${i + 1}`}
+                  className={`h-1.5 rounded-full transition-all ${i === idx ? "w-6 bg-gold" : "w-1.5 bg-cream/60"}`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </PageShell>
@@ -413,7 +440,7 @@ function PageMice() {
   const { t } = useTranslation();
   const pillars = t("mice.pillars", { returnObjects: true }) as string[];
   return (
-    <PageShell num="06" kicker={t("mice.kicker")} title={t("mice.title")}>
+    <PageShell num="04" kicker={t("mice.kicker")} title={t("mice.title")}>
       <div className="grid gap-12 md:grid-cols-5">
         <div className="md:col-span-2 space-y-6 max-w-2xl">
           <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
@@ -447,7 +474,7 @@ function PageSeminars() {
   const { t } = useTranslation();
   const tags = t("seminars.tags", { returnObjects: true }) as string[];
   return (
-    <PageShell num="07" kicker={t("seminars.kicker")} title={t("seminars.title")}>
+    <PageShell num="05" kicker={t("seminars.kicker")} title={t("seminars.title")}>
       <div className="grid gap-10 md:grid-cols-5">
         <div className="md:col-span-2 space-y-6 text-base md:text-lg text-foreground/80 leading-relaxed">
           <p>{t("seminars.p1")}</p>
@@ -470,7 +497,7 @@ function PageSeminars() {
 function PagePrivate() {
   const { t } = useTranslation();
   return (
-    <PageShell num="08" kicker={t("private.kicker")} title={t("private.title")}>
+    <PageShell num="06" kicker={t("private.kicker")} title={t("private.title")}>
       <div className="grid gap-8 md:grid-cols-6 items-center">
         <div className="md:col-span-2 space-y-6 max-w-2xl">
           <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
@@ -495,7 +522,7 @@ function PageCircuits() {
   const { t } = useTranslation();
   const items = t("circuits.items", { returnObjects: true }) as { t: string; d: string }[];
   return (
-    <PageShell tone="sand" num="09" kicker={t("circuits.kicker")} title={t("circuits.title")}>
+    <PageShell tone="sand" num="07" kicker={t("circuits.kicker")} title={t("circuits.title")}>
       <p className="mb-12 max-w-2xl text-base md:text-lg text-foreground/70 leading-relaxed">
         <strong>{t("circuits.intro1")}</strong>{t("circuits.intro2")}
       </p>
@@ -536,7 +563,7 @@ function PageDestinations() {
   const { t } = useTranslation();
   const cities = t("destinations.cities", { returnObjects: true }) as { t: string; d: string }[];
   return (
-    <PageShell num="10" kicker={t("destinations.kicker")} title={t("destinations.title")}>
+    <PageShell num="08" kicker={t("destinations.kicker")} title={t("destinations.title")}>
       <div className="grid gap-x-10 gap-y-6 md:grid-cols-3">
         {cities.map((c, i) => (
           <div key={c.t} className="flex gap-5 border-t border-burgundy/15 pt-5">
@@ -558,7 +585,7 @@ function PageExperiences() {
   const rows = t("experiences.items", { returnObjects: true }) as [string, string][];
   const exps = rows.map((r, i) => [icons[i], r[0], r[1]] as [string, string, string]);
   return (
-    <PageShell num="11" kicker={t("experiences.kicker")} title={t("experiences.title")}>
+    <PageShell num="09" kicker={t("experiences.kicker")} title={t("experiences.title")}>
       <div className="mb-10 grid grid-cols-2 gap-4">
         <div className="overflow-hidden rounded-sm shadow-[var(--shadow-elegant)] aspect-[4/3]">
           <img src={exp1.url} alt="Quad dans le désert" className="w-full h-full object-cover" />
@@ -585,7 +612,7 @@ function PageExperiences() {
 function PageContact() {
   const { t } = useTranslation();
   return (
-    <PageShell num="13" kicker={t("contact.kicker")} title={t("contact.title")}>
+    <PageShell num="12" kicker={t("contact.kicker")} title={t("contact.title")}>
       <div className="grid gap-16 md:grid-cols-2 items-start">
         <div className="space-y-8">
           <div>
@@ -691,7 +718,7 @@ function PageEventsInner() {
     { logo: logoOticon, name: "Oticon", ctx: t("events.clients.oticon"), pax: 180 },
   ];
   return (
-    <PageShell num="12" kicker={t("events.kicker")} title={t("events.title")}>
+    <PageShell num="10" kicker={t("events.kicker")} title={t("events.title")}>
       <div className="max-w-3xl space-y-4 text-base md:text-lg text-foreground/80 leading-relaxed mb-10">
         <p>{t("events.p1")}</p>
         <p className="text-foreground/60">{t("events.p2")}</p>

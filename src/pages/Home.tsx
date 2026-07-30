@@ -81,17 +81,28 @@ export default function Home() {
     };
   }, []);
 
-  // Reset scrolled state when switching pages
+  // Reset scrolled state + remonter chaque page en haut lors d'un changement de page
   useEffect(() => {
     setScrolled(false);
+    const el = pagerRef.current;
+    if (!el) return;
+    el.querySelectorAll<HTMLElement>(".page").forEach((p, i) => {
+      if (i !== active) p.scrollTop = 0;
+    });
+    const current = el.querySelectorAll<HTMLElement>(".page")[active];
+    if (current) current.scrollTop = 0;
   }, [active]);
 
   const goTo = (i: number) => {
     const el = pagerRef.current;
     if (!el) return;
+    el.querySelectorAll<HTMLElement>(".page").forEach((p) => {
+      p.scrollTop = 0;
+    });
     el.scrollTo({ left: i * window.innerWidth, behavior: "smooth" });
     setMenuOpen(false);
   };
+
 
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-background text-foreground">
@@ -297,7 +308,7 @@ function PageHome({ onNext }: { onNext: () => void }) {
               {t("home.cta")}
               <span className="transition-transform group-hover:translate-x-1">→</span>
             </button>
-            <a href="#contact" onClick={(e) => { e.preventDefault(); document.querySelectorAll(".page")[11]?.scrollIntoView(); }} className="text-sm underline underline-offset-4 text-cream/80 hover:text-gold">
+            <a href="#contact" onClick={(e) => { e.preventDefault(); const p = document.querySelectorAll<HTMLElement>(".page")[11]; if (p) { p.scrollTop = 0; p.scrollIntoView(); } }} className="text-sm underline underline-offset-4 text-cream/80 hover:text-gold">
               {t("home.contact")}
             </a>
           </div>

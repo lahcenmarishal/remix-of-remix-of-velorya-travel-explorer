@@ -7,13 +7,18 @@ import circuitSouk from "@/assets/circuit-souk.jpeg.asset.json";
 import circuitDesert from "@/assets/circuit-desert.jpeg.asset.json";
 import circuitChefchaouen from "@/assets/circuit-chefchaouen.jpeg.asset.json";
 import circuitKasbah from "@/assets/circuit-kasbah.jpeg.asset.json";
+import destFireShow from "@/assets/dest-fire-show.jpeg.asset.json";
+import destCampNuit from "@/assets/dest-camp-nuit.jpeg.asset.json";
+import destFantasia from "@/assets/dest-fantasia.jpeg.asset.json";
 import circuitTannerie from "@/assets/circuit-tannerie.jpeg.asset.json";
 import circuitEssaouira from "@/assets/circuit-essaouira.jpeg.asset.json";
 import desertDinner from "@/assets/desert-dinner.jpg.asset.json";
 import desertCamp from "@/assets/desert-camp.jpg.asset.json";
 import raid4x4 from "@/assets/raid-4x4.jpg.asset.json";
 import atelier from "@/assets/atelier.jpg.asset.json";
-import theMenthe from "@/assets/the-menthe-2.jpg.asset.json";
+import theMenthe from "@/assets/the-menthe-wide.jpg";
+import aboutTeam from "@/assets/about-team.jpeg.asset.json";
+import expVintageCars from "@/assets/exp-vintage-cars.jpeg.asset.json";
 import camelSunset from "@/assets/camel-sunset.jpg.asset.json";
 import restaurant from "@/assets/restaurant.png.asset.json";
 import mice1 from "@/assets/mice1.jpg.asset.json";
@@ -330,22 +335,23 @@ function PageAbout() {
   const { t } = useTranslation();
   return (
     <PageShell num="02" kicker={t("nav.pages.about")} title={t("about.title")}>
-      <div className="grid gap-12 md:grid-cols-5">
-        <div className="md:col-span-3 space-y-6 text-base md:text-lg leading-relaxed text-foreground/80 max-w-2xl">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-12">
+        <div className="md:col-span-3 space-y-4 md:space-y-6 text-sm sm:text-base md:text-lg leading-relaxed text-foreground/80 max-w-2xl">
           <p>{t("about.p1")}</p>
           <p>{t("about.p2")}</p>
           <p>{t("about.p3")}</p>
         </div>
-        <div className="md:col-span-2 relative">
-          <div className="aspect-[4/5] overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
-            <img src={theMenthe.url} alt={t("about.imgAlt")} className="h-full w-full object-cover" />
+        <div className="md:col-span-2 relative grid grid-cols-2 gap-4 md:grid-cols-1">
+          <div className="aspect-[4/3] overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
+            <img src={theMenthe} alt={t("about.imgAlt")} className="h-full w-full object-cover object-center" />
+
           </div>
-          <div className="absolute -bottom-6 -left-6 hidden md:block bg-burgundy text-cream p-6 rounded-sm max-w-[220px]">
-            <div className="font-display text-2xl italic text-gold">"</div>
-            <p className="text-sm leading-snug">{t("about.quote")}</p>
+          <div className="aspect-[4/3] overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
+            <img src={aboutTeam.url} alt="Groupe de voyageurs devant une kasbah au Maroc" className="h-full w-full object-cover" />
           </div>
         </div>
       </div>
+
     </PageShell>
   );
 }
@@ -575,6 +581,17 @@ function PageDestinations() {
           </div>
         ))}
       </div>
+      <div className="mt-10 grid grid-cols-3 grid-rows-2 gap-2 md:gap-3 aspect-[3/1.6]">
+        <div className="col-span-2 row-span-2 overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
+          <img src={destCampNuit.url} alt="Campement marocain illuminé la nuit" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" loading="lazy" />
+        </div>
+        <div className="col-span-1 row-span-1 overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
+          <img src={destFireShow.url} alt="Spectacle de feu dans le désert" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" loading="lazy" />
+        </div>
+        <div className="col-span-1 row-span-1 overflow-hidden rounded-sm shadow-[var(--shadow-elegant)]">
+          <img src={destFantasia.url} alt="Fantasia, cavaliers marocains" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" loading="lazy" />
+        </div>
+      </div>
     </PageShell>
   );
 }
@@ -586,12 +603,15 @@ function PageExperiences() {
   const exps = rows.map((r, i) => [icons[i], r[0], r[1]] as [string, string, string]);
   return (
     <PageShell num="09" kicker={t("experiences.kicker")} title={t("experiences.title")}>
-      <div className="mb-10 grid grid-cols-2 gap-4">
+      <div className="mb-10 grid grid-cols-2 md:grid-cols-3 gap-4">
         <div className="overflow-hidden rounded-sm shadow-[var(--shadow-elegant)] aspect-[4/3]">
           <img src={exp1.url} alt="Quad dans le désert" className="w-full h-full object-cover" />
         </div>
         <div className="overflow-hidden rounded-sm shadow-[var(--shadow-elegant)] aspect-[4/3]">
           <img src={exp2.url} alt="Side-car vintage à Marrakech" className="w-full h-full object-cover" />
+        </div>
+        <div className="col-span-2 md:col-span-1 overflow-hidden rounded-sm shadow-[var(--shadow-elegant)] aspect-[4/3]">
+          <img src={expVintageCars.url} alt="Rallye de voitures de collection au Maroc" className="w-full h-full object-cover" />
         </div>
       </div>
       <div className="grid gap-x-8 gap-y-5 md:grid-cols-2 max-w-5xl">
